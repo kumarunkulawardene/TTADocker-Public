@@ -1,0 +1,65 @@
+kubectl logs kta-deployment-6499c4f9d-724cv   -n kta
+Updated config settings in file: Agility.Server.Core.Executor.exe.config
+Updated config settings in file: Agility.Server.StreamingService.exe.config
+Updated config settings in file: web.config
+Updated config settings in file: Agility.Server.Core.Executor.exe.config
+Updated config settings in file: Agility.Server.Core.WorkerService.exe.config
+Updated config settings in file: Agility.Server.StreamingService.exe.config
+Importing certificate D:/Certs/ktawebapp.pfx
+
+
+   PSParentPath: Microsoft.PowerShell.Security\Certificate::LocalMachine\Root
+
+Thumbprint                                Subject
+----------                                -------
+50AC66B37247A6D0878F85023B8B13109AD9CFEF  E=kumarun.kulawardene@kofax.com, C...
+
+
+   PSParentPath: Microsoft.PowerShell.Security\Certificate::LocalMachine\CA
+
+Thumbprint                                Subject
+----------                                -------
+50AC66B37247A6D0878F85023B8B13109AD9CFEF  E=kumarun.kulawardene@kofax.com, C...
+Stop and restart IIS before binding certificates
+The World Wide Web Publishing Service service is stopping.
+The World Wide Web Publishing Service service was stopped successfully.
+
+The World Wide Web Publishing Service service is starting.
+The World Wide Web Publishing Service service was started successfully.
+
+Stop and restart IIS complete
+add cert
+add host reader
+Stop and restart IIS after binding certificates
+The World Wide Web Publishing Service service is stopping.
+The World Wide Web Publishing Service service was stopped successfully.
+
+The World Wide Web Publishing Service service is starting.
+The World Wide Web Publishing Service service was started successfully.
+
+Stop and restart IIS complete
+Kofax TotalAgility Core Worker
+WARNING: Waiting for service 'Kofax TotalAgility Core Worker (TotalAgility Core
+ Worker)' to start...
+
+Status      : Running
+Name        : TotalAgility Core Worker
+DisplayName : Kofax TotalAgility Core Worker
+
+
+Status      : Running
+Name        : TotalAgility Core Worker
+DisplayName : Kofax TotalAgility Core Worker
+
+Kofax TotalAgility Streaming Service
+WARNING: Waiting for service 'Kofax TotalAgility Streaming Service
+(TotalAgility Streaming Service)' to start...
+
+Status      : Running
+Name        : TotalAgility Streaming Service
+DisplayName : Kofax TotalAgility Streaming Service
+
+
+Status      : Running
+Name        : TotalAgility Streaming Service
+DisplayName : Kofax TotalAgility Streaming Service

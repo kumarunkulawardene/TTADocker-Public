@@ -1,0 +1,777 @@
+Executing task: docker build --pull --rm -f "Dockerfile" -t <CONTAINER_REGISTRY>/ktatransformation:v7.11.0.12-FEB2024v2 "." 
+
+Sending build context to Docker daemon  11.39GB
+Step 1/8 : ARG ImageTag=4.8.1-windowsservercore-ltsc2022
+Step 2/8 : FROM mcr.microsoft.com/dotnet/framework/aspnet:$ImageTag
+4.8.1-windowsservercore-ltsc2022: Pulling from dotnet/framework/aspnet
+Digest: sha256:751fa847c0070d674ec797e96ea4a72da1b44198799b46198e1dfa5f5e173d1a
+Status: Image is up to date for mcr.microsoft.com/dotnet/framework/aspnet:4.8.1-windowsservercore-ltsc2022
+ ---> e5b415828477
+Step 3/8 : ARG KTARole=TS
+ ---> Running in 021783bc992c
+Removing intermediate container 021783bc992c
+ ---> 8b0fab203763
+Step 4/8 : COPY ContainerFiles ContainerFiles_Installers ContainerFiles_$KTARole C:\\KTA/
+ ---> 516d780c18d3
+Step 5/8 : RUN powershell C:\KTA\PowershellScripts\ConfigureContainer.ps1 -KTARole $env:KTARole
+ ---> Running in 8d5593bd854d
+2/22/2024 11:30:15 AM: Success: Silent Config copied
+2/22/2024 11:30:15 AM: Success: FixPack Silent Config copied
+2/22/2024 11:30:21 AM: Install prerequisites for KTA
+Installing Windows Feature IIS-NetFxExtensibility45
+
+
+Path          : 
+Online        : True
+RestartNeeded : False
+
+Installing Windows Feature IIS-Security
+Path          : 
+Online        : True
+RestartNeeded : False
+
+Installing Windows Feature IIS-IPSecurity
+Path          : 
+Online        : True
+RestartNeeded : False
+
+Installing Windows Feature IIS-Performance
+Path          : 
+Online        : True
+RestartNeeded : False
+
+Installing Windows Feature IIS-WindowsActivationService
+Path          : 
+Online        : True
+RestartNeeded : False
+
+Installing Windows Feature IIS-ProcessModel
+Path          : 
+Online        : True
+RestartNeeded : False
+
+Installing Windows Feature IIS-ConfigurationAPI
+Path          : 
+Online        : True
+RestartNeeded : False
+
+Installing Windows Feature IIS-ISAPIExtensions
+Path          : 
+Online        : True
+RestartNeeded : False
+
+Installing Windows Feature IIS-ISAPIFilter
+Path          : 
+Online        : True
+RestartNeeded : False
+
+Installing Windows Feature IIS-WindowsAuthentication
+Path          : 
+Online        : True
+RestartNeeded : False
+
+Installing Windows Feature WCF-HTTP-Activation45
+Path          : 
+Online        : True
+RestartNeeded : False
+
+2/22/2024 11:33:59 AM: Add Admin user for KTA
+
+AccountExpires         : 
+Description            :
+Enabled                : True
+FullName               : KTA_Admin
+PasswordChangeableDate : 2/22/2024 11:34:00 AM
+PasswordExpires        :
+UserMayChangePassword  : False
+PasswordRequired       : False
+PasswordLastSet        : 2/22/2024 11:34:00 AM
+LastLogon              :
+Name                   : KTA_Admin
+SID                    : S-1-5-21-4195473005-4248345477-3347787491-1000
+PrincipalSource        : Local
+ObjectClass            : User
+
+VERBOSE: Loading module from path 'C:\KTA\PowershellScripts\LHSNTrights.psm1'.
+VERBOSE: Importing function 'Get-LHSNTRights'.
+VERBOSE: Importing function 'Set-LHSNTRights'.
+VERBOSE: Importing function 'Set-LHSTokenPrivilege'.
+True
+True
+True
+2/22/2024 11:34:02 AM: Install Self signed cert
+
+IPAddress : <IP_ADDRESS>
+Port      : 443
+Host      :
+Store     : My
+Sites     :
+
+
+Attempting stop...
+Internet services successfully stopped
+Attempting start...
+Internet services successfully restarted
+2/22/2024 11:35:16 AM: Enable MS DTC
+
+AuthenticationLevel               : NoAuth
+InboundTransactionsEnabled        : True
+LUTransactionsEnabled             : True
+OutboundTransactionsEnabled       : True
+RemoteAdministrationAccessEnabled : True
+RemoteClientAccessEnabled         : True
+XATransactionsEnabled             : True
+PSComputerName                    :
+
+2/22/2024 11:35:18 AM: Updating Registry to restrict null session and anonymous access
+2/22/2024 11:35:18 AM: Start silent Install
+Installing font: C:\KTA\Fonts\Action-Icons-Library.ttf with font name 'Action-Icons-Library Regular (TrueType)'
+Copying font: C:\KTA\Fonts\Action-Icons-Library.ttf
+Registering font: C:\KTA\Fonts\Action-Icons-Library.ttf
+Installing font: C:\KTA\Fonts\AdobeArabic-Bold.otf with font name 'Adobe Arabic Bold (OpenType)'
+Copying font: C:\KTA\Fonts\AdobeArabic-Bold.otf
+Registering font: C:\KTA\Fonts\AdobeArabic-Bold.otf
+Installing font: C:\KTA\Fonts\AdobeArabic-BoldItalic.otf with font name 'Adobe Arabic Bold Italic (OpenType)'
+Copying font: C:\KTA\Fonts\AdobeArabic-BoldItalic.otf
+Registering font: C:\KTA\Fonts\AdobeArabic-BoldItalic.otf
+Installing font: C:\KTA\Fonts\AdobeArabic-Italic.otf with font name 'Adobe Arabic Italic (OpenType)'
+Copying font: C:\KTA\Fonts\AdobeArabic-Italic.otf
+Registering font: C:\KTA\Fonts\AdobeArabic-Italic.otf
+Installing font: C:\KTA\Fonts\AdobeArabic-Regular.otf with font name 'Adobe Arabic Regular (OpenType)'
+Copying font: C:\KTA\Fonts\AdobeArabic-Regular.otf
+Registering font: C:\KTA\Fonts\AdobeArabic-Regular.otf
+Installing font: C:\KTA\Fonts\AdobeFanHeitiStd-Bold.otf with font name 'Adobe Fan Heiti Std B Bold (OpenType)'
+Copying font: C:\KTA\Fonts\AdobeFanHeitiStd-Bold.otf
+Registering font: C:\KTA\Fonts\AdobeFanHeitiStd-Bold.otf
+Installing font: C:\KTA\Fonts\AdobeGothicStd-Bold.otf with font name 'Adobe Gothic Std B Bold (OpenType)'
+Copying font: C:\KTA\Fonts\AdobeGothicStd-Bold.otf
+Registering font: C:\KTA\Fonts\AdobeGothicStd-Bold.otf
+Installing font: C:\KTA\Fonts\AdobeHebrew-Bold.otf with font name 'Adobe Hebrew Bold (OpenType)'
+Copying font: C:\KTA\Fonts\AdobeHebrew-Bold.otf
+Registering font: C:\KTA\Fonts\AdobeHebrew-Bold.otf
+Installing font: C:\KTA\Fonts\AdobeHebrew-BoldItalic.otf with font name 'Adobe Hebrew Bold Italic (OpenType)'
+Copying font: C:\KTA\Fonts\AdobeHebrew-BoldItalic.otf
+Registering font: C:\KTA\Fonts\AdobeHebrew-BoldItalic.otf
+Installing font: C:\KTA\Fonts\AdobeHebrew-Italic.otf with font name 'Adobe Hebrew Italic (OpenType)'
+Copying font: C:\KTA\Fonts\AdobeHebrew-Italic.otf
+Registering font: C:\KTA\Fonts\AdobeHebrew-Italic.otf
+Installing font: C:\KTA\Fonts\AdobeHebrew-Regular.otf with font name 'Adobe Hebrew Regular (OpenType)'
+Copying font: C:\KTA\Fonts\AdobeHebrew-Regular.otf
+Registering font: C:\KTA\Fonts\AdobeHebrew-Regular.otf
+Installing font: C:\KTA\Fonts\AdobeHeitiStd-Regular.otf with font name 'Adobe Heiti Std R Regular (OpenType)'
+Copying font: C:\KTA\Fonts\AdobeHeitiStd-Regular.otf
+Registering font: C:\KTA\Fonts\AdobeHeitiStd-Regular.otf
+Installing font: C:\KTA\Fonts\AdobeMingStd-Light.otf with font name 'Adobe Ming Std L Regular (OpenType)'
+Copying font: C:\KTA\Fonts\AdobeMingStd-Light.otf
+Registering font: C:\KTA\Fonts\AdobeMingStd-Light.otf
+Installing font: C:\KTA\Fonts\AdobeMyungjoStd-Medium.otf with font name 'Adobe Myungjo Std M Regular (OpenType)'
+Copying font: C:\KTA\Fonts\AdobeMyungjoStd-Medium.otf
+Registering font: C:\KTA\Fonts\AdobeMyungjoStd-Medium.otf
+Installing font: C:\KTA\Fonts\AdobePiStd.otf with font name 'Adobe Pi Std Regular (OpenType)'
+Copying font: C:\KTA\Fonts\AdobePiStd.otf
+Registering font: C:\KTA\Fonts\AdobePiStd.otf
+Installing font: C:\KTA\Fonts\AdobeSongStd-Light.otf with font name 'Adobe Song Std L Regular (OpenType)'
+Copying font: C:\KTA\Fonts\AdobeSongStd-Light.otf
+Registering font: C:\KTA\Fonts\AdobeSongStd-Light.otf
+Installing font: C:\KTA\Fonts\AdobeThai-Bold.otf with font name 'Adobe Thai Bold (OpenType)'
+Copying font: C:\KTA\Fonts\AdobeThai-Bold.otf
+Registering font: C:\KTA\Fonts\AdobeThai-Bold.otf
+Installing font: C:\KTA\Fonts\AdobeThai-BoldItalic.otf with font name 'Adobe Thai Bold Italic (OpenType)'
+Copying font: C:\KTA\Fonts\AdobeThai-BoldItalic.otf
+Registering font: C:\KTA\Fonts\AdobeThai-BoldItalic.otf
+Installing font: C:\KTA\Fonts\AdobeThai-Italic.otf with font name 'Adobe Thai Italic (OpenType)'
+Copying font: C:\KTA\Fonts\AdobeThai-Italic.otf
+Registering font: C:\KTA\Fonts\AdobeThai-Italic.otf
+Installing font: C:\KTA\Fonts\AdobeThai-Regular.otf with font name 'Adobe Thai Regular (OpenType)'
+Copying font: C:\KTA\Fonts\AdobeThai-Regular.otf
+Registering font: C:\KTA\Fonts\AdobeThai-Regular.otf
+Installing font: C:\KTA\Fonts\app850.fon with font name 'app850'
+Copying font: C:\KTA\Fonts\app850.fon
+Registering font: C:\KTA\Fonts\app850.fon
+Installing font: C:\KTA\Fonts\arial.ttf with font name 'Arial Regular (TrueType)'
+Copying font: C:\KTA\Fonts\arial.ttf
+Registering font: C:\KTA\Fonts\arial.ttf
+Installing font: C:\KTA\Fonts\arialbd.ttf with font name 'Arial Bold (TrueType)'
+Copying font: C:\KTA\Fonts\arialbd.ttf
+Registering font: C:\KTA\Fonts\arialbd.ttf
+Installing font: C:\KTA\Fonts\arialbi.ttf with font name 'Arial Bold Italic (TrueType)'
+Copying font: C:\KTA\Fonts\arialbi.ttf
+Registering font: C:\KTA\Fonts\arialbi.ttf
+Installing font: C:\KTA\Fonts\ariali.ttf with font name 'Arial Italic (TrueType)'
+Copying font: C:\KTA\Fonts\ariali.ttf
+Registering font: C:\KTA\Fonts\ariali.ttf
+Installing font: C:\KTA\Fonts\arialmt.ttf with font name 'ArialMT Regular (TrueType)'
+Copying font: C:\KTA\Fonts\arialmt.ttf
+Registering font: C:\KTA\Fonts\arialmt.ttf
+Installing font: C:\KTA\Fonts\ARIALMTEXTRABOLD.TTF with font name 'Arial MT Extra Bold Regular (TrueType)'
+Copying font: C:\KTA\Fonts\ARIALMTEXTRABOLD.TTF
+Registering font: C:\KTA\Fonts\ARIALMTEXTRABOLD.TTF
+Installing font: C:\KTA\Fonts\ariblk.ttf with font name 'Arial Black Regular (TrueType)'
+Copying font: C:\KTA\Fonts\ariblk.ttf
+Registering font: C:\KTA\Fonts\ariblk.ttf
+Installing font: C:\KTA\Fonts\bahnschrift.ttf with font name 'Bahnschrift Regular (TrueType)'
+Copying font: C:\KTA\Fonts\bahnschrift.ttf
+Registering font: C:\KTA\Fonts\bahnschrift.ttf
+Installing font: C:\KTA\Fonts\BIZ-UDGothicB.ttc with font name 'BIZ-UDGothicB'
+Copying font: C:\KTA\Fonts\BIZ-UDGothicB.ttc
+Registering font: C:\KTA\Fonts\BIZ-UDGothicB.ttc
+Installing font: C:\KTA\Fonts\BIZ-UDGothicR.ttc with font name 'BIZ-UDGothicR'
+Copying font: C:\KTA\Fonts\BIZ-UDGothicR.ttc
+Registering font: C:\KTA\Fonts\BIZ-UDGothicR.ttc
+Installing font: C:\KTA\Fonts\BIZ-UDMinchoM.ttc with font name 'BIZ-UDMinchoM'
+Copying font: C:\KTA\Fonts\BIZ-UDMinchoM.ttc
+Registering font: C:\KTA\Fonts\BIZ-UDMinchoM.ttc
+Installing font: C:\KTA\Fonts\calibri.ttf with font name 'Calibri Regular (TrueType)'
+Copying font: C:\KTA\Fonts\calibri.ttf
+Registering font: C:\KTA\Fonts\calibri.ttf
+Installing font: C:\KTA\Fonts\calibrib.ttf with font name 'Calibri Bold (TrueType)'
+Copying font: C:\KTA\Fonts\calibrib.ttf
+Registering font: C:\KTA\Fonts\calibrib.ttf
+Installing font: C:\KTA\Fonts\calibrii.ttf with font name 'Calibri Italic (TrueType)'
+Copying font: C:\KTA\Fonts\calibrii.ttf
+Registering font: C:\KTA\Fonts\calibrii.ttf
+Installing font: C:\KTA\Fonts\calibril.ttf with font name 'Calibri Light Regular (TrueType)'
+Copying font: C:\KTA\Fonts\calibril.ttf
+Registering font: C:\KTA\Fonts\calibril.ttf
+Installing font: C:\KTA\Fonts\calibrili.ttf with font name 'Calibri Light Italic (TrueType)'
+Copying font: C:\KTA\Fonts\calibrili.ttf
+Registering font: C:\KTA\Fonts\calibrili.ttf
+Installing font: C:\KTA\Fonts\calibriz.ttf with font name 'Calibri Bold Italic (TrueType)'
+Copying font: C:\KTA\Fonts\calibriz.ttf
+Registering font: C:\KTA\Fonts\calibriz.ttf
+Installing font: C:\KTA\Fonts\cambria.ttc with font name 'cambria'
+Copying font: C:\KTA\Fonts\cambria.ttc
+Registering font: C:\KTA\Fonts\cambria.ttc
+Installing font: C:\KTA\Fonts\cambriab.ttf with font name 'Cambria Bold (TrueType)'
+Copying font: C:\KTA\Fonts\cambriab.ttf
+Registering font: C:\KTA\Fonts\cambriab.ttf
+Installing font: C:\KTA\Fonts\cambriai.ttf with font name 'Cambria Italic (TrueType)'
+Copying font: C:\KTA\Fonts\cambriai.ttf
+Registering font: C:\KTA\Fonts\cambriai.ttf
+Installing font: C:\KTA\Fonts\cambriaz.ttf with font name 'Cambria Bold Italic (TrueType)'
+Copying font: C:\KTA\Fonts\cambriaz.ttf
+Registering font: C:\KTA\Fonts\cambriaz.ttf
+Installing font: C:\KTA\Fonts\Candara.ttf with font name 'Candara Regular (TrueType)'
+Copying font: C:\KTA\Fonts\Candara.ttf
+Registering font: C:\KTA\Fonts\Candara.ttf
+Installing font: C:\KTA\Fonts\Candarab.ttf with font name 'Candara Bold (TrueType)'
+Copying font: C:\KTA\Fonts\Candarab.ttf
+Registering font: C:\KTA\Fonts\Candarab.ttf
+Installing font: C:\KTA\Fonts\Candarai.ttf with font name 'Candara Italic (TrueType)'
+Copying font: C:\KTA\Fonts\Candarai.ttf
+Registering font: C:\KTA\Fonts\Candarai.ttf
+Installing font: C:\KTA\Fonts\Candaral.ttf with font name 'Candara Light Regular (TrueType)'
+Copying font: C:\KTA\Fonts\Candaral.ttf
+Registering font: C:\KTA\Fonts\Candaral.ttf
+Installing font: C:\KTA\Fonts\Candarali.ttf with font name 'Candara Light Italic (TrueType)'
+Copying font: C:\KTA\Fonts\Candarali.ttf
+Registering font: C:\KTA\Fonts\Candarali.ttf
+Installing font: C:\KTA\Fonts\Candaraz.ttf with font name 'Candara Bold Italic (TrueType)'
+Copying font: C:\KTA\Fonts\Candaraz.ttf
+Registering font: C:\KTA\Fonts\Candaraz.ttf
+Installing font: C:\KTA\Fonts\comic.ttf with font name 'Comic Sans MS Regular (TrueType)'
+Copying font: C:\KTA\Fonts\comic.ttf
+Registering font: C:\KTA\Fonts\comic.ttf
+Installing font: C:\KTA\Fonts\comicbd.ttf with font name 'Comic Sans MS Bold (TrueType)'
+Copying font: C:\KTA\Fonts\comicbd.ttf
+Registering font: C:\KTA\Fonts\comicbd.ttf
+Installing font: C:\KTA\Fonts\comici.ttf with font name 'Comic Sans MS Italic (TrueType)'
+Copying font: C:\KTA\Fonts\comici.ttf
+Registering font: C:\KTA\Fonts\comici.ttf
+Installing font: C:\KTA\Fonts\comicz.ttf with font name 'Comic Sans MS Bold Italic (TrueType)'
+Copying font: C:\KTA\Fonts\comicz.ttf
+Registering font: C:\KTA\Fonts\comicz.ttf
+Installing font: C:\KTA\Fonts\consola.ttf with font name 'Consolas Regular (TrueType)'
+Copying font: C:\KTA\Fonts\consola.ttf
+Registering font: C:\KTA\Fonts\consola.ttf
+Installing font: C:\KTA\Fonts\consolab.ttf with font name 'Consolas Bold (TrueType)'
+Copying font: C:\KTA\Fonts\consolab.ttf
+Registering font: C:\KTA\Fonts\consolab.ttf
+Installing font: C:\KTA\Fonts\consolai.ttf with font name 'Consolas Italic (TrueType)'
+Copying font: C:\KTA\Fonts\consolai.ttf
+Registering font: C:\KTA\Fonts\consolai.ttf
+Installing font: C:\KTA\Fonts\consolaz.ttf with font name 'Consolas Bold Italic (TrueType)'
+Copying font: C:\KTA\Fonts\consolaz.ttf
+Registering font: C:\KTA\Fonts\consolaz.ttf
+Installing font: C:\KTA\Fonts\constan.ttf with font name 'Constantia Regular (TrueType)'
+Copying font: C:\KTA\Fonts\constan.ttf
+Registering font: C:\KTA\Fonts\constan.ttf
+Installing font: C:\KTA\Fonts\constanb.ttf with font name 'Constantia Bold (TrueType)'
+Copying font: C:\KTA\Fonts\constanb.ttf
+Registering font: C:\KTA\Fonts\constanb.ttf
+Installing font: C:\KTA\Fonts\constani.ttf with font name 'Constantia Italic (TrueType)'
+Copying font: C:\KTA\Fonts\constani.ttf
+Registering font: C:\KTA\Fonts\constani.ttf
+Installing font: C:\KTA\Fonts\constanz.ttf with font name 'Constantia Bold Italic (TrueType)'
+Copying font: C:\KTA\Fonts\constanz.ttf
+Registering font: C:\KTA\Fonts\constanz.ttf
+Installing font: C:\KTA\Fonts\corbel.ttf with font name 'Corbel Regular (TrueType)'
+Copying font: C:\KTA\Fonts\corbel.ttf
+Registering font: C:\KTA\Fonts\corbel.ttf
+Installing font: C:\KTA\Fonts\corbelb.ttf with font name 'Corbel Bold (TrueType)'
+Copying font: C:\KTA\Fonts\corbelb.ttf
+Registering font: C:\KTA\Fonts\corbelb.ttf
+Installing font: C:\KTA\Fonts\corbeli.ttf with font name 'Corbel Italic (TrueType)'
+Copying font: C:\KTA\Fonts\corbeli.ttf
+Registering font: C:\KTA\Fonts\corbeli.ttf
+Installing font: C:\KTA\Fonts\corbell.ttf with font name 'Corbel Light Regular (TrueType)'
+Copying font: C:\KTA\Fonts\corbell.ttf
+Registering font: C:\KTA\Fonts\corbell.ttf
+Installing font: C:\KTA\Fonts\corbelli.ttf with font name 'Corbel Light Italic (TrueType)'
+Copying font: C:\KTA\Fonts\corbelli.ttf
+Registering font: C:\KTA\Fonts\corbelli.ttf
+Installing font: C:\KTA\Fonts\corbelz.ttf with font name 'Corbel Bold Italic (TrueType)'
+Copying font: C:\KTA\Fonts\corbelz.ttf
+Registering font: C:\KTA\Fonts\corbelz.ttf
+Installing font: C:\KTA\Fonts\cour.ttf with font name 'Courier New Regular (TrueType)'
+Copying font: C:\KTA\Fonts\cour.ttf
+Registering font: C:\KTA\Fonts\cour.ttf
+Installing font: C:\KTA\Fonts\courbd.ttf with font name 'Courier New Bold (TrueType)'
+Copying font: C:\KTA\Fonts\courbd.ttf
+Registering font: C:\KTA\Fonts\courbd.ttf
+Installing font: C:\KTA\Fonts\courbi.ttf with font name 'Courier New Bold Italic (TrueType)'
+Copying font: C:\KTA\Fonts\courbi.ttf
+Registering font: C:\KTA\Fonts\courbi.ttf
+Installing font: C:\KTA\Fonts\coure.fon with font name 'coure'
+Copying font: C:\KTA\Fonts\coure.fon
+Registering font: C:\KTA\Fonts\coure.fon
+Installing font: C:\KTA\Fonts\couri.ttf with font name 'Courier New Italic (TrueType)'
+Copying font: C:\KTA\Fonts\couri.ttf
+Registering font: C:\KTA\Fonts\couri.ttf
+Installing font: C:\KTA\Fonts\CourierStd-Bold.otf with font name 'Courier Std Bold (OpenType)'
+Copying font: C:\KTA\Fonts\CourierStd-Bold.otf
+Registering font: C:\KTA\Fonts\CourierStd-Bold.otf
+Installing font: C:\KTA\Fonts\CourierStd-BoldOblique.otf with font name 'Courier Std Bold Italic (OpenType)'
+Copying font: C:\KTA\Fonts\CourierStd-BoldOblique.otf
+Registering font: C:\KTA\Fonts\CourierStd-BoldOblique.otf
+Installing font: C:\KTA\Fonts\CourierStd-Oblique.otf with font name 'Courier Std Italic (OpenType)'
+Copying font: C:\KTA\Fonts\CourierStd-Oblique.otf
+Registering font: C:\KTA\Fonts\CourierStd-Oblique.otf
+Installing font: C:\KTA\Fonts\CourierStd.otf with font name 'Courier Std Regular (OpenType)'
+Copying font: C:\KTA\Fonts\CourierStd.otf
+Registering font: C:\KTA\Fonts\CourierStd.otf
+Installing font: C:\KTA\Fonts\ebrima.ttf with font name 'Ebrima Regular (TrueType)'
+Copying font: C:\KTA\Fonts\ebrima.ttf
+Registering font: C:\KTA\Fonts\ebrima.ttf
+Installing font: C:\KTA\Fonts\ebrimabd.ttf with font name 'Ebrima Bold (TrueType)'
+Copying font: C:\KTA\Fonts\ebrimabd.ttf
+Registering font: C:\KTA\Fonts\ebrimabd.ttf
+Installing font: C:\KTA\Fonts\framd.ttf with font name 'Franklin Gothic Medium Regular (TrueType)'
+Copying font: C:\KTA\Fonts\framd.ttf
+Registering font: C:\KTA\Fonts\framd.ttf
+Installing font: C:\KTA\Fonts\framdit.ttf with font name 'Franklin Gothic Medium Italic (TrueType)'
+Copying font: C:\KTA\Fonts\framdit.ttf
+Registering font: C:\KTA\Fonts\framdit.ttf
+Installing font: C:\KTA\Fonts\Gabriola.ttf with font name 'Gabriola Regular (TrueType)'
+Copying font: C:\KTA\Fonts\Gabriola.ttf
+Registering font: C:\KTA\Fonts\Gabriola.ttf
+Installing font: C:\KTA\Fonts\gadugi.ttf with font name 'Gadugi Regular (TrueType)'
+Copying font: C:\KTA\Fonts\gadugi.ttf
+Registering font: C:\KTA\Fonts\gadugi.ttf
+Installing font: C:\KTA\Fonts\gadugib.ttf with font name 'Gadugi Bold (TrueType)'
+Copying font: C:\KTA\Fonts\gadugib.ttf
+Registering font: C:\KTA\Fonts\gadugib.ttf
+Installing font: C:\KTA\Fonts\georgia.ttf with font name 'Georgia Regular (TrueType)'
+Copying font: C:\KTA\Fonts\georgia.ttf
+Registering font: C:\KTA\Fonts\georgia.ttf
+Installing font: C:\KTA\Fonts\georgiab.ttf with font name 'Georgia Bold (TrueType)'
+Copying font: C:\KTA\Fonts\georgiab.ttf
+Registering font: C:\KTA\Fonts\georgiab.ttf
+Installing font: C:\KTA\Fonts\georgiai.ttf with font name 'Georgia Italic (TrueType)'
+Copying font: C:\KTA\Fonts\georgiai.ttf
+Registering font: C:\KTA\Fonts\georgiai.ttf
+Installing font: C:\KTA\Fonts\georgiaz.ttf with font name 'Georgia Bold Italic (TrueType)'
+Copying font: C:\KTA\Fonts\georgiaz.ttf
+Registering font: C:\KTA\Fonts\georgiaz.ttf
+Installing font: C:\KTA\Fonts\gulim.ttc with font name 'gulim'
+Copying font: C:\KTA\Fonts\gulim.ttc
+Registering font: C:\KTA\Fonts\gulim.ttc
+Installing font: C:\KTA\Fonts\himalaya.ttf with font name 'Microsoft Himalaya Regular (TrueType)'
+Copying font: C:\KTA\Fonts\himalaya.ttf
+Registering font: C:\KTA\Fonts\himalaya.ttf
+Installing font: C:\KTA\Fonts\impact.ttf with font name 'Impact Regular (TrueType)'
+Copying font: C:\KTA\Fonts\impact.ttf
+Registering font: C:\KTA\Fonts\impact.ttf
+Installing font: C:\KTA\Fonts\Inkfree.ttf with font name 'Ink Free Regular (TrueType)'
+Copying font: C:\KTA\Fonts\Inkfree.ttf
+Registering font: C:\KTA\Fonts\Inkfree.ttf
+Installing font: C:\KTA\Fonts\javatext.ttf with font name 'Javanese Text Regular (TrueType)'
+Copying font: C:\KTA\Fonts\javatext.ttf
+Registering font: C:\KTA\Fonts\javatext.ttf
+Installing font: C:\KTA\Fonts\Kofax-Action-Icons.ttf with font name 'Kofax-Action-Icons Regular (TrueType)'
+Copying font: C:\KTA\Fonts\Kofax-Action-Icons.ttf
+Registering font: C:\KTA\Fonts\Kofax-Action-Icons.ttf
+Installing font: C:\KTA\Fonts\KozGoPr6N-Medium.otf with font name 'Kozuka Gothic Pr6N M Regular (OpenType)'
+Copying font: C:\KTA\Fonts\KozGoPr6N-Medium.otf
+Registering font: C:\KTA\Fonts\KozGoPr6N-Medium.otf
+Installing font: C:\KTA\Fonts\KozMinPr6N-Regular.otf with font name 'Kozuka Mincho Pr6N R Regular (OpenType)'
+Copying font: C:\KTA\Fonts\KozMinPr6N-Regular.otf
+Registering font: C:\KTA\Fonts\KozMinPr6N-Regular.otf
+Installing font: C:\KTA\Fonts\LeelaUIb.ttf with font name 'Leelawadee UI Bold (TrueType)'
+Copying font: C:\KTA\Fonts\LeelaUIb.ttf
+Registering font: C:\KTA\Fonts\LeelaUIb.ttf
+Installing font: C:\KTA\Fonts\LeelawUI.ttf with font name 'Leelawadee UI Regular (TrueType)'
+Copying font: C:\KTA\Fonts\LeelawUI.ttf
+Registering font: C:\KTA\Fonts\LeelawUI.ttf
+Installing font: C:\KTA\Fonts\LeelUIsl.ttf with font name 'Leelawadee UI Semilight Regular (TrueType)'
+Copying font: C:\KTA\Fonts\LeelUIsl.ttf
+Registering font: C:\KTA\Fonts\LeelUIsl.ttf
+Installing font: C:\KTA\Fonts\lucon.ttf with font name 'Lucida Console Regular (TrueType)'
+Font already exists: C:\KTA\Fonts\lucon.ttf
+Registering font: C:\KTA\Fonts\lucon.ttf
+Installing font: C:\KTA\Fonts\l_10646.ttf with font name 'Lucida Sans Unicode Regular (TrueType)'
+Copying font: C:\KTA\Fonts\l_10646.ttf
+Registering font: C:\KTA\Fonts\l_10646.ttf
+Installing font: C:\KTA\Fonts\malgun.ttf with font name 'Malgun Gothic Regular (TrueType)'
+Copying font: C:\KTA\Fonts\malgun.ttf
+Registering font: C:\KTA\Fonts\malgun.ttf
+Installing font: C:\KTA\Fonts\malgunbd.ttf with font name 'Malgun Gothic Bold (TrueType)'
+Copying font: C:\KTA\Fonts\malgunbd.ttf
+Registering font: C:\KTA\Fonts\malgunbd.ttf
+Installing font: C:\KTA\Fonts\malgunsl.ttf with font name 'Malgun Gothic Semilight Regular (TrueType)'
+Copying font: C:\KTA\Fonts\malgunsl.ttf
+Registering font: C:\KTA\Fonts\malgunsl.ttf
+Installing font: C:\KTA\Fonts\meiryo.ttc with font name 'meiryo'
+Copying font: C:\KTA\Fonts\meiryo.ttc
+Registering font: C:\KTA\Fonts\meiryo.ttc
+Installing font: C:\KTA\Fonts\meiryob.ttc with font name 'meiryob'
+Copying font: C:\KTA\Fonts\meiryob.ttc
+Registering font: C:\KTA\Fonts\meiryob.ttc
+Installing font: C:\KTA\Fonts\micross.ttf with font name 'Microsoft Sans Serif Regular (TrueType)'
+Copying font: C:\KTA\Fonts\micross.ttf
+Registering font: C:\KTA\Fonts\micross.ttf
+Installing font: C:\KTA\Fonts\mingliu.ttc with font name 'mingliu'
+Copying font: C:\KTA\Fonts\mingliu.ttc
+Registering font: C:\KTA\Fonts\mingliu.ttc
+Installing font: C:\KTA\Fonts\mingliub.ttc with font name 'mingliub'
+Copying font: C:\KTA\Fonts\mingliub.ttc
+Registering font: C:\KTA\Fonts\mingliub.ttc
+Installing font: C:\KTA\Fonts\MinionPro-Regular.otf with font name 'Minion Pro Regular (OpenType)'
+Copying font: C:\KTA\Fonts\MinionPro-Regular.otf
+Registering font: C:\KTA\Fonts\MinionPro-Regular.otf
+Installing font: C:\KTA\Fonts\mmrtext.ttf with font name 'Myanmar Text Regular (TrueType)'
+Copying font: C:\KTA\Fonts\mmrtext.ttf
+Registering font: C:\KTA\Fonts\mmrtext.ttf
+Installing font: C:\KTA\Fonts\mmrtextb.ttf with font name 'Myanmar Text Bold (TrueType)'
+Copying font: C:\KTA\Fonts\mmrtextb.ttf
+Registering font: C:\KTA\Fonts\mmrtextb.ttf
+Installing font: C:\KTA\Fonts\modern.fon with font name 'modern'
+Copying font: C:\KTA\Fonts\modern.fon
+Registering font: C:\KTA\Fonts\modern.fon
+Installing font: C:\KTA\Fonts\monbaiti.ttf with font name 'Mongolian Baiti Regular (TrueType)'
+Copying font: C:\KTA\Fonts\monbaiti.ttf
+Registering font: C:\KTA\Fonts\monbaiti.ttf
+Installing font: C:\KTA\Fonts\msgothic.ttc with font name 'msgothic'
+Copying font: C:\KTA\Fonts\msgothic.ttc
+Registering font: C:\KTA\Fonts\msgothic.ttc
+Installing font: C:\KTA\Fonts\msjh.ttc with font name 'msjh'
+Copying font: C:\KTA\Fonts\msjh.ttc
+Registering font: C:\KTA\Fonts\msjh.ttc
+Installing font: C:\KTA\Fonts\msjhbd.ttc with font name 'msjhbd'
+Copying font: C:\KTA\Fonts\msjhbd.ttc
+Registering font: C:\KTA\Fonts\msjhbd.ttc
+Installing font: C:\KTA\Fonts\msjhl.ttc with font name 'msjhl'
+Copying font: C:\KTA\Fonts\msjhl.ttc
+Registering font: C:\KTA\Fonts\msjhl.ttc
+Installing font: C:\KTA\Fonts\msmincho.ttc with font name 'msmincho'
+Copying font: C:\KTA\Fonts\msmincho.ttc
+Registering font: C:\KTA\Fonts\msmincho.ttc
+Installing font: C:\KTA\Fonts\msyh.ttc with font name 'msyh'
+Copying font: C:\KTA\Fonts\msyh.ttc
+Registering font: C:\KTA\Fonts\msyh.ttc
+Installing font: C:\KTA\Fonts\msyhbd.ttc with font name 'msyhbd'
+Copying font: C:\KTA\Fonts\msyhbd.ttc
+Registering font: C:\KTA\Fonts\msyhbd.ttc
+Installing font: C:\KTA\Fonts\msyhl.ttc with font name 'msyhl'
+Copying font: C:\KTA\Fonts\msyhl.ttc
+Registering font: C:\KTA\Fonts\msyhl.ttc
+Installing font: C:\KTA\Fonts\msyi.ttf with font name 'Microsoft Yi Baiti Regular (TrueType)'
+Copying font: C:\KTA\Fonts\msyi.ttf
+Registering font: C:\KTA\Fonts\msyi.ttf
+Installing font: C:\KTA\Fonts\mvboli.ttf with font name 'MV Boli Regular (TrueType)'
+Copying font: C:\KTA\Fonts\mvboli.ttf
+Registering font: C:\KTA\Fonts\mvboli.ttf
+Installing font: C:\KTA\Fonts\MyriadPro-Regular.otf with font name 'Myriad Pro Regular (OpenType)'
+Copying font: C:\KTA\Fonts\MyriadPro-Regular.otf
+Registering font: C:\KTA\Fonts\MyriadPro-Regular.otf
+Installing font: C:\KTA\Fonts\Nirmala.ttf with font name 'Nirmala UI Regular (TrueType)'
+Copying font: C:\KTA\Fonts\Nirmala.ttf
+Registering font: C:\KTA\Fonts\Nirmala.ttf
+Installing font: C:\KTA\Fonts\NirmalaB.ttf with font name 'Nirmala UI Bold (TrueType)'
+Copying font: C:\KTA\Fonts\NirmalaB.ttf
+Registering font: C:\KTA\Fonts\NirmalaB.ttf
+Installing font: C:\KTA\Fonts\NirmalaS.ttf with font name 'Nirmala UI Semilight Regular (TrueType)'
+Copying font: C:\KTA\Fonts\NirmalaS.ttf
+Registering font: C:\KTA\Fonts\NirmalaS.ttf
+Installing font: C:\KTA\Fonts\ntailu.ttf with font name 'Microsoft New Tai Lue Regular (TrueType)'
+Copying font: C:\KTA\Fonts\ntailu.ttf
+Registering font: C:\KTA\Fonts\ntailu.ttf
+Installing font: C:\KTA\Fonts\ntailub.ttf with font name 'Microsoft New Tai Lue Bold (TrueType)'
+Copying font: C:\KTA\Fonts\ntailub.ttf
+Registering font: C:\KTA\Fonts\ntailub.ttf
+Installing font: C:\KTA\Fonts\pala.ttf with font name 'Palatino Linotype Regular (TrueType)'
+Copying font: C:\KTA\Fonts\pala.ttf
+Registering font: C:\KTA\Fonts\pala.ttf
+Installing font: C:\KTA\Fonts\palab.ttf with font name 'Palatino Linotype Bold (TrueType)'
+Copying font: C:\KTA\Fonts\palab.ttf
+Registering font: C:\KTA\Fonts\palab.ttf
+Installing font: C:\KTA\Fonts\palabi.ttf with font name 'Palatino Linotype Bold Italic (TrueType)'
+Copying font: C:\KTA\Fonts\palabi.ttf
+Registering font: C:\KTA\Fonts\palabi.ttf
+Installing font: C:\KTA\Fonts\palai.ttf with font name 'Palatino Linotype Italic (TrueType)'
+Copying font: C:\KTA\Fonts\palai.ttf
+Registering font: C:\KTA\Fonts\palai.ttf
+Installing font: C:\KTA\Fonts\phagspa.ttf with font name 'Microsoft PhagsPa Regular (TrueType)'
+Copying font: C:\KTA\Fonts\phagspa.ttf
+Registering font: C:\KTA\Fonts\phagspa.ttf
+Installing font: C:\KTA\Fonts\phagspab.ttf with font name 'Microsoft PhagsPa Bold (TrueType)'
+Copying font: C:\KTA\Fonts\phagspab.ttf
+Registering font: C:\KTA\Fonts\phagspab.ttf
+Installing font: C:\KTA\Fonts\roman.fon with font name 'roman'
+Copying font: C:\KTA\Fonts\roman.fon
+Registering font: C:\KTA\Fonts\roman.fon
+Installing font: C:\KTA\Fonts\script.fon with font name 'script'
+Copying font: C:\KTA\Fonts\script.fon
+Registering font: C:\KTA\Fonts\script.fon
+Installing font: C:\KTA\Fonts\segmdl2.ttf with font name 'Segoe MDL2 Assets Regular (TrueType)'
+Copying font: C:\KTA\Fonts\segmdl2.ttf
+Registering font: C:\KTA\Fonts\segmdl2.ttf
+Installing font: C:\KTA\Fonts\segoepr.ttf with font name 'Segoe Print Regular (TrueType)'
+Copying font: C:\KTA\Fonts\segoepr.ttf
+Registering font: C:\KTA\Fonts\segoepr.ttf
+Installing font: C:\KTA\Fonts\segoeprb.ttf with font name 'Segoe Print Bold (TrueType)'
+Copying font: C:\KTA\Fonts\segoeprb.ttf
+Registering font: C:\KTA\Fonts\segoeprb.ttf
+Installing font: C:\KTA\Fonts\segoesc.ttf with font name 'Segoe Script Regular (TrueType)'
+Copying font: C:\KTA\Fonts\segoesc.ttf
+Registering font: C:\KTA\Fonts\segoesc.ttf
+Installing font: C:\KTA\Fonts\segoescb.ttf with font name 'Segoe Script Bold (TrueType)'
+Copying font: C:\KTA\Fonts\segoescb.ttf
+Registering font: C:\KTA\Fonts\segoescb.ttf
+Installing font: C:\KTA\Fonts\segoeui.ttf with font name 'Segoe UI Regular (TrueType)'
+Copying font: C:\KTA\Fonts\segoeui.ttf
+Registering font: C:\KTA\Fonts\segoeui.ttf
+Installing font: C:\KTA\Fonts\segoeuib.ttf with font name 'Segoe UI Bold (TrueType)'
+Copying font: C:\KTA\Fonts\segoeuib.ttf
+Registering font: C:\KTA\Fonts\segoeuib.ttf
+Installing font: C:\KTA\Fonts\segoeuii.ttf with font name 'Segoe UI Italic (TrueType)'
+Copying font: C:\KTA\Fonts\segoeuii.ttf
+Registering font: C:\KTA\Fonts\segoeuii.ttf
+Installing font: C:\KTA\Fonts\segoeuil.ttf with font name 'Segoe UI Light Regular (TrueType)'
+Copying font: C:\KTA\Fonts\segoeuil.ttf
+Registering font: C:\KTA\Fonts\segoeuil.ttf
+Installing font: C:\KTA\Fonts\segoeuisl.ttf with font name 'Segoe UI Semilight Regular (TrueType)'
+Copying font: C:\KTA\Fonts\segoeuisl.ttf
+Registering font: C:\KTA\Fonts\segoeuisl.ttf
+Installing font: C:\KTA\Fonts\segoeuiz.ttf with font name 'Segoe UI Bold Italic (TrueType)'
+Copying font: C:\KTA\Fonts\segoeuiz.ttf
+Registering font: C:\KTA\Fonts\segoeuiz.ttf
+Installing font: C:\KTA\Fonts\seguibl.ttf with font name 'Segoe UI Black Regular (TrueType)'
+Copying font: C:\KTA\Fonts\seguibl.ttf
+Registering font: C:\KTA\Fonts\seguibl.ttf
+Installing font: C:\KTA\Fonts\seguibli.ttf with font name 'Segoe UI Black Italic (TrueType)'
+Copying font: C:\KTA\Fonts\seguibli.ttf
+Registering font: C:\KTA\Fonts\seguibli.ttf
+Installing font: C:\KTA\Fonts\seguiemj.ttf with font name 'Segoe UI Emoji Regular (TrueType)'
+Copying font: C:\KTA\Fonts\seguiemj.ttf
+Registering font: C:\KTA\Fonts\seguiemj.ttf
+Installing font: C:\KTA\Fonts\seguihis.ttf with font name 'Segoe UI Historic Regular (TrueType)'
+Copying font: C:\KTA\Fonts\seguihis.ttf
+Registering font: C:\KTA\Fonts\seguihis.ttf
+Installing font: C:\KTA\Fonts\seguili.ttf with font name 'Segoe UI Light Italic (TrueType)'
+Copying font: C:\KTA\Fonts\seguili.ttf
+Registering font: C:\KTA\Fonts\seguili.ttf
+Installing font: C:\KTA\Fonts\seguisb.ttf with font name 'Segoe UI Semibold Regular (TrueType)'
+Copying font: C:\KTA\Fonts\seguisb.ttf
+Registering font: C:\KTA\Fonts\seguisb.ttf
+Installing font: C:\KTA\Fonts\seguisbi.ttf with font name 'Segoe UI Semibold Italic (TrueType)'
+Copying font: C:\KTA\Fonts\seguisbi.ttf
+Registering font: C:\KTA\Fonts\seguisbi.ttf
+Installing font: C:\KTA\Fonts\seguisli.ttf with font name 'Segoe UI Semilight Italic (TrueType)'
+Copying font: C:\KTA\Fonts\seguisli.ttf
+Registering font: C:\KTA\Fonts\seguisli.ttf
+Installing font: C:\KTA\Fonts\seguisym.ttf with font name 'Segoe UI Symbol Regular (TrueType)'
+Copying font: C:\KTA\Fonts\seguisym.ttf
+Registering font: C:\KTA\Fonts\seguisym.ttf
+Installing font: C:\KTA\Fonts\serife.fon with font name 'serife'
+Copying font: C:\KTA\Fonts\serife.fon
+Registering font: C:\KTA\Fonts\serife.fon
+Installing font: C:\KTA\Fonts\simsun.ttc with font name 'simsun'
+Copying font: C:\KTA\Fonts\simsun.ttc
+Registering font: C:\KTA\Fonts\simsun.ttc
+Installing font: C:\KTA\Fonts\simsunb.ttf with font name 'SimSun-ExtB Regular (TrueType)'
+Copying font: C:\KTA\Fonts\simsunb.ttf
+Registering font: C:\KTA\Fonts\simsunb.ttf
+Installing font: C:\KTA\Fonts\Sitka.ttc with font name 'Sitka'
+Copying font: C:\KTA\Fonts\Sitka.ttc
+Registering font: C:\KTA\Fonts\Sitka.ttc
+Installing font: C:\KTA\Fonts\SitkaB.ttc with font name 'SitkaB'
+Copying font: C:\KTA\Fonts\SitkaB.ttc
+Registering font: C:\KTA\Fonts\SitkaB.ttc
+Installing font: C:\KTA\Fonts\SitkaI.ttc with font name 'SitkaI'
+Copying font: C:\KTA\Fonts\SitkaI.ttc
+Registering font: C:\KTA\Fonts\SitkaI.ttc
+Installing font: C:\KTA\Fonts\SitkaZ.ttc with font name 'SitkaZ'
+Copying font: C:\KTA\Fonts\SitkaZ.ttc
+Registering font: C:\KTA\Fonts\SitkaZ.ttc
+Installing font: C:\KTA\Fonts\smalle.fon with font name 'smalle'
+Copying font: C:\KTA\Fonts\smalle.fon
+Registering font: C:\KTA\Fonts\smalle.fon
+Installing font: C:\KTA\Fonts\sserife.fon with font name 'sserife'
+Copying font: C:\KTA\Fonts\sserife.fon
+Registering font: C:\KTA\Fonts\sserife.fon
+Installing font: C:\KTA\Fonts\sylfaen.ttf with font name 'Sylfaen Regular (TrueType)'
+Copying font: C:\KTA\Fonts\sylfaen.ttf
+Registering font: C:\KTA\Fonts\sylfaen.ttf
+Installing font: C:\KTA\Fonts\symbol.ttf with font name 'Symbol Regular (TrueType)'
+Copying font: C:\KTA\Fonts\symbol.ttf
+Registering font: C:\KTA\Fonts\symbol.ttf
+Installing font: C:\KTA\Fonts\tahoma.ttf with font name 'Tahoma Regular (TrueType)'
+Copying font: C:\KTA\Fonts\tahoma.ttf
+Registering font: C:\KTA\Fonts\tahoma.ttf
+Installing font: C:\KTA\Fonts\tahomabd.ttf with font name 'Tahoma Bold (TrueType)'
+Copying font: C:\KTA\Fonts\tahomabd.ttf
+Registering font: C:\KTA\Fonts\tahomabd.ttf
+Installing font: C:\KTA\Fonts\taile.ttf with font name 'Microsoft Tai Le Regular (TrueType)'
+Copying font: C:\KTA\Fonts\taile.ttf
+Registering font: C:\KTA\Fonts\taile.ttf
+Installing font: C:\KTA\Fonts\taileb.ttf with font name 'Microsoft Tai Le Bold (TrueType)'
+Copying font: C:\KTA\Fonts\taileb.ttf
+Registering font: C:\KTA\Fonts\taileb.ttf
+Installing font: C:\KTA\Fonts\times.ttf with font name 'Times New Roman Regular (TrueType)'
+Copying font: C:\KTA\Fonts\times.ttf
+Registering font: C:\KTA\Fonts\times.ttf
+Installing font: C:\KTA\Fonts\timesbd.ttf with font name 'Times New Roman Bold (TrueType)'
+Copying font: C:\KTA\Fonts\timesbd.ttf
+Registering font: C:\KTA\Fonts\timesbd.ttf
+Installing font: C:\KTA\Fonts\timesbi.ttf with font name 'Times New Roman Bold Italic (TrueType)'
+Copying font: C:\KTA\Fonts\timesbi.ttf
+Registering font: C:\KTA\Fonts\timesbi.ttf
+Installing font: C:\KTA\Fonts\timesi.ttf with font name 'Times New Roman Italic (TrueType)'
+Copying font: C:\KTA\Fonts\timesi.ttf
+Registering font: C:\KTA\Fonts\timesi.ttf
+Installing font: C:\KTA\Fonts\trebuc.ttf with font name 'Trebuchet MS Regular (TrueType)'
+Copying font: C:\KTA\Fonts\trebuc.ttf
+Registering font: C:\KTA\Fonts\trebuc.ttf
+Installing font: C:\KTA\Fonts\trebucbd.ttf with font name 'Trebuchet MS Bold (TrueType)'
+Copying font: C:\KTA\Fonts\trebucbd.ttf
+Registering font: C:\KTA\Fonts\trebucbd.ttf
+Installing font: C:\KTA\Fonts\trebucbi.ttf with font name 'Trebuchet MS Bold Italic (TrueType)'
+Copying font: C:\KTA\Fonts\trebucbi.ttf
+Registering font: C:\KTA\Fonts\trebucbi.ttf
+Installing font: C:\KTA\Fonts\trebucit.ttf with font name 'Trebuchet MS Italic (TrueType)'
+Copying font: C:\KTA\Fonts\trebucit.ttf
+Registering font: C:\KTA\Fonts\trebucit.ttf
+Installing font: C:\KTA\Fonts\UDDigiKyokashoN-B.ttc with font name 'UDDigiKyokashoN-B'
+Copying font: C:\KTA\Fonts\UDDigiKyokashoN-B.ttc
+Registering font: C:\KTA\Fonts\UDDigiKyokashoN-B.ttc
+Installing font: C:\KTA\Fonts\UDDigiKyokashoN-R.ttc with font name 'UDDigiKyokashoN-R'
+Copying font: C:\KTA\Fonts\UDDigiKyokashoN-R.ttc
+Registering font: C:\KTA\Fonts\UDDigiKyokashoN-R.ttc
+Installing font: C:\KTA\Fonts\verdana.ttf with font name 'Verdana Regular (TrueType)'
+Copying font: C:\KTA\Fonts\verdana.ttf
+Registering font: C:\KTA\Fonts\verdana.ttf
+Installing font: C:\KTA\Fonts\verdanab.ttf with font name 'Verdana Bold (TrueType)'
+Copying font: C:\KTA\Fonts\verdanab.ttf
+Registering font: C:\KTA\Fonts\verdanab.ttf
+Installing font: C:\KTA\Fonts\verdanai.ttf with font name 'Verdana Italic (TrueType)'
+Copying font: C:\KTA\Fonts\verdanai.ttf
+Registering font: C:\KTA\Fonts\verdanai.ttf
+Installing font: C:\KTA\Fonts\verdanaz.ttf with font name 'Verdana Bold Italic (TrueType)'
+Copying font: C:\KTA\Fonts\verdanaz.ttf
+Registering font: C:\KTA\Fonts\verdanaz.ttf
+Installing font: C:\KTA\Fonts\vga850.fon with font name 'vga850'
+Copying font: C:\KTA\Fonts\vga850.fon
+Registering font: C:\KTA\Fonts\vga850.fon
+Installing font: C:\KTA\Fonts\vgafix.fon with font name 'vgafix'
+Copying font: C:\KTA\Fonts\vgafix.fon
+Registering font: C:\KTA\Fonts\vgafix.fon
+Installing font: C:\KTA\Fonts\vgasys.fon with font name 'vgasys'
+Copying font: C:\KTA\Fonts\vgasys.fon
+Registering font: C:\KTA\Fonts\vgasys.fon
+Installing font: C:\KTA\Fonts\webdings.ttf with font name 'Webdings Regular (TrueType)'
+Copying font: C:\KTA\Fonts\webdings.ttf
+Registering font: C:\KTA\Fonts\webdings.ttf
+Installing font: C:\KTA\Fonts\wingding.ttf with font name 'Wingdings Regular (TrueType)'
+Copying font: C:\KTA\Fonts\wingding.ttf
+Registering font: C:\KTA\Fonts\wingding.ttf
+Installing font: C:\KTA\Fonts\YuGothB.ttc with font name 'YuGothB'
+Copying font: C:\KTA\Fonts\YuGothB.ttc
+Registering font: C:\KTA\Fonts\YuGothB.ttc
+Installing font: C:\KTA\Fonts\YuGothL.ttc with font name 'YuGothL'
+Copying font: C:\KTA\Fonts\YuGothL.ttc
+Registering font: C:\KTA\Fonts\YuGothL.ttc
+Installing font: C:\KTA\Fonts\YuGothM.ttc with font name 'YuGothM'
+Copying font: C:\KTA\Fonts\YuGothM.ttc
+Registering font: C:\KTA\Fonts\YuGothM.ttc
+Installing font: C:\KTA\Fonts\YuGothR.ttc with font name 'YuGothR'
+Copying font: C:\KTA\Fonts\YuGothR.ttc
+Registering font: C:\KTA\Fonts\YuGothR.ttc
+Installing font: C:\KTA\Fonts\yumin.ttf with font name 'Yu Mincho Regular (TrueType)'
+Copying font: C:\KTA\Fonts\yumin.ttf
+Registering font: C:\KTA\Fonts\yumin.ttf
+Installing font: C:\KTA\Fonts\yumindb.ttf with font name 'Yu Mincho Demibold Bold (TrueType)'
+Copying font: C:\KTA\Fonts\yumindb.ttf
+Registering font: C:\KTA\Fonts\yumindb.ttf
+Installing font: C:\KTA\Fonts\yuminl.ttf with font name 'Yu Mincho Light Regular (TrueType)'
+Copying font: C:\KTA\Fonts\yuminl.ttf
+Registering font: C:\KTA\Fonts\yuminl.ttf
+2/22/2024 11:53:41 AM: Windows fonts copied successfully.
+
+Status      : Stopped
+Name        : KofaxTransformationServerService
+DisplayName : Kofax Transformation Server
+
+2/22/2024 11:53:45 AM: Start Fixpack Silent Install
+2/22/2024 12:00:48 PM: Fixpack Silent Install Finished.. sleep for 10 seconds
+Set-Service : Cannot stop service 'Kofax Transformation Server 
+(KofaxTransformationServerService)' because it is dependent on other services.
+At C:\KTA\PowershellScripts\ConfigureContainer.ps1:190 char:4
++             Set-Service -Name  $_.Name -StartupType Manual -Status "S ...
++             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (System.ServiceProcess.Service
+   Controller:ServiceController) [Set-Service], ServiceCommandException
+    + FullyQualifiedErrorId : ServiceIsDependentOnNoForce,Microsoft.PowerShell
+   .Commands.SetServiceCommand
+
+2/22/2024 12:00:58 PM: Completed FixPack silent Install
+2/22/2024 12:00:58 PM: Success: TS doc converter ini copied
+2/22/2024 12:00:58 PM: Success: TS doc converter default ini copied
+Install Logs
+KofaxTotalAgilitySilentHotFixLog.txt
+Silent HotFix Log
+Success: Loading config files into memory
+Success: Files copied successfully
+Success: Upgrade.exe config updated successfully
+Success: Transformation Server installed successfully
+Success: Product successfully registered
+KofaxTotalAgilitySilentInstallLog.txt
+Silent Install Log
+Success: Files copied successfully
+Success: Config files updated successfully
+Success: Transformation Server installed successfully
+Success: Product successfully registered
+2/22/2024 12:00:58 PM: Completed silent Install
+2/22/2024 12:00:58 PM: Delete Program Cache
+2/22/2024 12:00:59 PM: Program Cache deletion completed
+2/22/2024 12:00:59 PM: Delete installation media
+2/22/2024 12:03:59 PM: Installation media deletion completed
+
+
+Removing intermediate container 8d5593bd854d
+ ---> 393726850c5a
+Step 6/8 : EXPOSE 80
+ ---> Running in eea601ce9333
+Removing intermediate container eea601ce9333
+ ---> 3aa2e7a2f12e
+Step 7/8 : EXPOSE 443
+ ---> Running in 0a076f4dad1f
+Removing intermediate container 0a076f4dad1f
+ ---> 7aa6589825fa
+Step 8/8 : ENTRYPOINT powershell "C:\\KTA\\PowershellScripts\\Startup.ps1"
+ ---> Running in 829f1b2b7845
+Removing intermediate container 829f1b2b7845
+ ---> 5b54c1efdc6f
+Successfully built 5b54c1efdc6f
+Successfully tagged <CONTAINER_REGISTRY>/ktatransformation:v7.11.0.12-FEB2024v2
+ *  Terminal will be reused by tasks, press any key to close it. 

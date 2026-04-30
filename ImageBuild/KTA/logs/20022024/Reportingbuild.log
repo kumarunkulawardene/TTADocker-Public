@@ -1,0 +1,183 @@
+Executing task: docker build --pull --rm -f "Dockerfile" -t <CONTAINER_REGISTRY>/ktareporting:v7.11.0.12-FEB2024v2 "." 
+
+Sending build context to Docker daemon  11.52GB
+Step 1/8 : ARG ImageTag=4.8.1-windowsservercore-ltsc2022
+Step 2/8 : FROM mcr.microsoft.com/dotnet/framework/aspnet:$ImageTag
+4.8.1-windowsservercore-ltsc2022: Pulling from dotnet/framework/aspnet
+Digest: sha256:751fa847c0070d674ec797e96ea4a72da1b44198799b46198e1dfa5f5e173d1a
+Status: Image is up to date for mcr.microsoft.com/dotnet/framework/aspnet:4.8.1-windowsservercore-ltsc2022
+ ---> e5b415828477
+Step 3/8 : ARG KTARole=Reporting
+ ---> Running in e502243c9ccf
+Removing intermediate container e502243c9ccf
+ ---> 30e0c9cda223
+Step 4/8 : COPY ContainerFiles ContainerFiles_Installers ContainerFiles_$KTARole C:\\KTA/
+ ---> ac37c673fa78
+Step 5/8 : RUN powershell C:\KTA\PowershellScripts\ConfigureContainer.ps1 -KTARole $env:KTARole
+ ---> Running in aab008c7210f
+2/23/2024 1:23:20 PM: Success: Silent Config copied
+2/23/2024 1:23:20 PM: Success: FixPack Silent Config copied
+2/23/2024 1:23:25 PM: Install prerequisites for KTA
+Installing Windows Feature IIS-NetFxExtensibility45
+
+
+Path          : 
+Online        : True
+RestartNeeded : False
+
+Installing Windows Feature IIS-Security
+Path          : 
+Online        : True
+RestartNeeded : False
+
+Installing Windows Feature IIS-IPSecurity
+Path          : 
+Online        : True
+RestartNeeded : False
+
+Installing Windows Feature IIS-Performance
+Path          : 
+Online        : True
+RestartNeeded : False
+
+Installing Windows Feature IIS-WindowsActivationService
+Path          : 
+Online        : True
+RestartNeeded : False
+
+Installing Windows Feature IIS-ProcessModel
+Path          : 
+Online        : True
+RestartNeeded : False
+
+Installing Windows Feature IIS-ConfigurationAPI
+Path          : 
+Online        : True
+RestartNeeded : False
+
+Installing Windows Feature IIS-ISAPIExtensions
+Path          : 
+Online        : True
+RestartNeeded : False
+
+Installing Windows Feature IIS-ISAPIFilter
+Path          : 
+Online        : True
+RestartNeeded : False
+
+Installing Windows Feature IIS-WindowsAuthentication
+Path          : 
+Online        : True
+RestartNeeded : False
+
+Installing Windows Feature WCF-HTTP-Activation45
+Path          : 
+Online        : True
+RestartNeeded : False
+
+2/23/2024 1:26:57 PM: Add Admin user for KTA
+
+AccountExpires         : 
+Description            :
+Enabled                : True
+FullName               : KTA_Admin
+PasswordChangeableDate : 2/23/2024 1:26:58 PM
+PasswordExpires        :
+UserMayChangePassword  : False
+PasswordRequired       : False
+PasswordLastSet        : 2/23/2024 1:26:58 PM
+LastLogon              :
+Name                   : KTA_Admin
+SID                    : S-1-5-21-4195473005-4248345477-3347787491-1000
+PrincipalSource        : Local
+ObjectClass            : User
+
+VERBOSE: Loading module from path 'C:\KTA\PowershellScripts\LHSNTrights.psm1'.
+VERBOSE: Importing function 'Get-LHSNTRights'.
+VERBOSE: Importing function 'Set-LHSNTRights'.
+VERBOSE: Importing function 'Set-LHSTokenPrivilege'.
+True
+True
+True
+2/23/2024 1:26:59 PM: Install Self signed cert
+
+IPAddress : <IP_ADDRESS>
+Port      : 443
+Host      :
+Store     : My
+Sites     :
+
+
+Attempting stop...
+Internet services successfully stopped
+Attempting start...
+Internet services successfully restarted
+2/23/2024 1:28:19 PM: Enable MS DTC
+
+AuthenticationLevel               : NoAuth
+InboundTransactionsEnabled        : True
+LUTransactionsEnabled             : True
+OutboundTransactionsEnabled       : True
+RemoteAdministrationAccessEnabled : True
+RemoteClientAccessEnabled         : True
+XATransactionsEnabled             : True
+PSComputerName                    :
+
+2/23/2024 1:28:22 PM: Updating Registry to restrict null session and anonymous access
+2/23/2024 1:28:22 PM: Start silent Install
+
+Status      : Stopped
+Name        : KofaxTAReportingServerService
+DisplayName : Kofax TotalAgility Reporting service
+
+2/23/2024 1:29:37 PM: Start Fixpack Silent Install
+2/23/2024 1:31:37 PM: Fixpack Silent Install Finished.. sleep for 10 seconds
+Set-Service : Cannot stop service 'Kofax TotalAgility Reporting service 
+(KofaxTAReportingServerService)' because it is dependent on other services.
+At C:\KTA\PowershellScripts\ConfigureContainer.ps1:190 char:4
++             Set-Service -Name  $_.Name -StartupType Manual -Status "S ...
++             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (System.ServiceProcess.Service
+   Controller:ServiceController) [Set-Service], ServiceCommandException
+    + FullyQualifiedErrorId : ServiceIsDependentOnNoForce,Microsoft.PowerShell
+   .Commands.SetServiceCommand
+
+2/23/2024 1:31:47 PM: Completed FixPack silent Install
+Install Logs
+KofaxTotalAgilitySilentHotFixLog.txt
+Silent HotFix Log
+Success: Loading config files into memory
+Success: Files copied successfully
+Success: Upgrade.exe config updated successfully
+Success: Reporting Service installed successfully
+Success: Product successfully registered
+KofaxTotalAgilitySilentInstallLog.txt
+Silent Install Log
+Success: Files copied successfully
+Success: Config files updated successfully
+Success: Reporting Service installed successfully
+Success: Product successfully registered
+2/23/2024 1:31:47 PM: Completed silent Install
+2/23/2024 1:31:47 PM: Delete Program Cache
+2/23/2024 1:31:47 PM: Program Cache deletion completed
+2/23/2024 1:31:47 PM: Delete installation media
+2/23/2024 1:34:33 PM: Installation media deletion completed
+
+
+Removing intermediate container aab008c7210f
+ ---> 4915c3d34e72
+Step 6/8 : EXPOSE 80
+ ---> Running in 01ad095c2f1b
+Removing intermediate container 01ad095c2f1b
+ ---> 93f30dd2c883
+Step 7/8 : EXPOSE 443
+ ---> Running in 580fffba392d
+Removing intermediate container 580fffba392d
+ ---> 50e372c974ce
+Step 8/8 : ENTRYPOINT powershell "C:\\KTA\\PowershellScripts\\Startup.ps1"
+ ---> Running in 103ad3e9f64a
+Removing intermediate container 103ad3e9f64a
+ ---> 5da68a58ad7f
+Successfully built 5da68a58ad7f
+Successfully tagged <CONTAINER_REGISTRY>/ktareporting:v7.11.0.12-FEB2024v2
+ *  Terminal will be reused by tasks, press any key to close it. 
