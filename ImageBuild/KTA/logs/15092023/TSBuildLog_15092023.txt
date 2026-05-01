@@ -1,0 +1,392 @@
+ Executing task: docker build --pull --rm -f "Dockerfile" -t ktatransformation:v7.11.0.5-SEP2023v3 "." 
+
+Sending build context to Docker daemon  9.654GB
+Step 1/8 : ARG ImageTag=4.8.1-windowsservercore-ltsc2022
+Step 2/8 : FROM mcr.microsoft.com/dotnet/framework/aspnet:$ImageTag
+4.8.1-windowsservercore-ltsc2022: Pulling from dotnet/framework/aspnet
+Digest: sha256:112822e1b1386fd39a11a6e5d6ed3bafebffc986f8e0f106675827fa001f9c2b
+Status: Image is up to date for mcr.microsoft.com/dotnet/framework/aspnet:4.8.1-windowsservercore-ltsc2022
+ ---> c113f8e4f3f9
+Step 3/8 : ARG KTARole=TS
+ ---> Running in 2dc2b03b8ac2
+Removing intermediate container 2dc2b03b8ac2
+ ---> 7e9b1075c18c
+Step 4/8 : COPY ContainerFiles ContainerFiles_Installers ContainerFiles_$KTARole C:\\KTA/
+ ---> 87901c4ec7a3
+Step 5/8 : RUN powershell C:\KTA\PowershellScripts\ConfigureContainer.ps1 -KTARole $env:KTARole
+ ---> Running in 01f76b0f64f0
+9/15/2023 8:19:57 AM: Success: Silent Config copied
+9/15/2023 8:19:57 AM: Success: FixPack Silent Config copied
+9/15/2023 8:20:04 AM: Install prerequisites for KTA
+Installing Windows Feature IIS-NetFxExtensibility45
+
+
+Path          : 
+Online        : True
+RestartNeeded : False
+
+Installing Windows Feature IIS-Security
+Path          : 
+Online        : True
+RestartNeeded : False
+
+Installing Windows Feature IIS-IPSecurity
+Path          : 
+Online        : True
+RestartNeeded : False
+
+Installing Windows Feature IIS-Performance
+Path          : 
+Online        : True
+RestartNeeded : False
+
+Installing Windows Feature IIS-WindowsActivationService
+Path          : 
+Online        : True
+RestartNeeded : False
+
+Installing Windows Feature IIS-ProcessModel
+Path          : 
+Online        : True
+RestartNeeded : False
+
+Installing Windows Feature IIS-ConfigurationAPI
+Path          : 
+Online        : True
+RestartNeeded : False
+
+Installing Windows Feature IIS-ISAPIExtensions
+Path          : 
+Online        : True
+RestartNeeded : False
+
+Installing Windows Feature IIS-ISAPIFilter
+Path          : 
+Online        : True
+RestartNeeded : False
+
+Installing Windows Feature IIS-WindowsAuthentication
+Path          : 
+Online        : True
+RestartNeeded : False
+
+Installing Windows Feature WCF-HTTP-Activation45
+Path          : 
+Online        : True
+RestartNeeded : False
+
+9/15/2023 8:23:51 AM: Add Admin user for KTA
+
+AccountExpires         : 
+Description            :
+Enabled                : True
+FullName               : KTA_Admin
+PasswordChangeableDate : 9/15/2023 8:23:52 AM
+PasswordExpires        :
+UserMayChangePassword  : False
+PasswordRequired       : False
+PasswordLastSet        : 9/15/2023 8:23:52 AM
+LastLogon              :
+Name                   : KTA_Admin
+SID                    : S-1-5-21-3778669072-2724315857-3391928532-1000
+PrincipalSource        : Local
+ObjectClass            : User
+
+VERBOSE: Loading module from path 'C:\KTA\PowershellScripts\LHSNTrights.psm1'.
+VERBOSE: Importing function 'Get-LHSNTRights'.
+VERBOSE: Importing function 'Set-LHSNTRights'.
+VERBOSE: Importing function 'Set-LHSTokenPrivilege'.
+True
+True
+True
+9/15/2023 8:23:54 AM: Install Self signed cert
+
+IPAddress : <IP_ADDRESS>
+Port      : 443
+Host      :
+Store     : My
+Sites     :
+
+
+Attempting stop...
+Internet services successfully stopped
+Attempting start...
+Internet services successfully restarted
+9/15/2023 8:25:11 AM: Enable MS DTC
+
+AuthenticationLevel               : NoAuth
+InboundTransactionsEnabled        : True
+LUTransactionsEnabled             : True
+OutboundTransactionsEnabled       : True
+RemoteAdministrationAccessEnabled : True
+RemoteClientAccessEnabled         : True
+XATransactionsEnabled             : True
+PSComputerName                    :
+
+9/15/2023 8:25:14 AM: Updating Registry to restrict null session and anonymous access
+9/15/2023 8:25:14 AM: Start silent Install
+Font copied and  registered: Action-Icons-Library (TrueType)  Action-Icons-Library.ttf
+Font copied and  registered: AdobeArabic-Bold (TrueType)  AdobeArabic-Bold.otf
+Font copied and  registered: AdobeArabic-BoldItalic (TrueType)  AdobeArabic-BoldItalic.otf
+Font copied and  registered: AdobeArabic-Italic (TrueType)  AdobeArabic-Italic.otf
+Font copied and  registered: AdobeArabic-Regular (TrueType)  AdobeArabic-Regular.otf
+Font copied and  registered: AdobeFanHeitiStd-Bold (TrueType)  AdobeFanHeitiStd-Bold.otf
+Font copied and  registered: AdobeGothicStd-Bold (TrueType)  AdobeGothicStd-Bold.otf
+Font copied and  registered: AdobeHebrew-Bold (TrueType)  AdobeHebrew-Bold.otf
+Font copied and  registered: AdobeHebrew-BoldItalic (TrueType)  AdobeHebrew-BoldItalic.otf
+Font copied and  registered: AdobeHebrew-Italic (TrueType)  AdobeHebrew-Italic.otf
+Font copied and  registered: AdobeHebrew-Regular (TrueType)  AdobeHebrew-Regular.otf
+Font copied and  registered: AdobeHeitiStd-Regular (TrueType)  AdobeHeitiStd-Regular.otf
+Font copied and  registered: AdobeMingStd-Light (TrueType)  AdobeMingStd-Light.otf
+Font copied and  registered: AdobeMyungjoStd-Medium (TrueType)  AdobeMyungjoStd-Medium.otf
+Font copied and  registered: AdobePiStd (TrueType)  AdobePiStd.otf
+Font copied and  registered: AdobeSongStd-Light (TrueType)  AdobeSongStd-Light.otf
+Font copied and  registered: AdobeThai-Bold (TrueType)  AdobeThai-Bold.otf
+Font copied and  registered: AdobeThai-BoldItalic (TrueType)  AdobeThai-BoldItalic.otf
+Font copied and  registered: AdobeThai-Italic (TrueType)  AdobeThai-Italic.otf
+Font copied and  registered: AdobeThai-Regular (TrueType)  AdobeThai-Regular.otf
+Font copied and  registered: Terminal (TrueType)  app850.fon
+Font copied and  registered: Arial (TrueType)  arial.ttf
+Font copied and  registered: Arial Bold (TrueType)  arialbd.ttf
+Font copied and  registered: Arial Bold Italic (TrueType)  arialbi.ttf
+Font copied and  registered: Arial Italic (TrueType)  ariali.ttf
+Font copied and  registered: ArialMT (TrueType)  arialmt.ttf
+Font copied and  registered: Arial MT Extra Bold (TrueType)  ARIALMTEXTRABOLD.TTF
+Font copied and  registered: Arial Black (TrueType)  ariblk.ttf
+Font copied and  registered: Bahnschrift (TrueType)  bahnschrift.ttf
+Font copied and  registered: BIZ UDGothic Bold; BIZ UDPGothic Bold (TrueType)  BIZ-UDGothicB.ttc
+Font copied and  registered: BIZ UDGothic; BIZ UDPGothic (TrueType)  BIZ-UDGothicR.ttc
+Font copied and  registered: BIZ UDMincho Medium; BIZ UDPMincho Medium (TrueType)  BIZ-UDMinchoM.ttc
+Font copied and  registered: Calibri (TrueType)  calibri.ttf
+Font copied and  registered: Calibri Bold (TrueType)  calibrib.ttf
+Font copied and  registered: Calibri Italic (TrueType)  calibrii.ttf
+Font copied and  registered: Calibri Light (TrueType)  calibril.ttf
+Font copied and  registered: Calibri Light Italic (TrueType)  calibrili.ttf
+Font copied and  registered: Calibri Bold Italic (TrueType)  calibriz.ttf
+Font copied and  registered: Cambria; Cambria Math (TrueType)  cambria.ttc
+Font copied and  registered: Cambria Bold (TrueType)  cambriab.ttf
+Font copied and  registered: Cambria Italic (TrueType)  cambriai.ttf
+Font copied and  registered: Cambria Bold Italic (TrueType)  cambriaz.ttf
+Font copied and  registered: Candara (TrueType)  Candara.ttf
+Font copied and  registered: Candara Bold (TrueType)  Candarab.ttf
+Font copied and  registered: Candara Italic (TrueType)  Candarai.ttf
+Font copied and  registered: Candara Light (TrueType)  Candaral.ttf
+Font copied and  registered: Candara Light Italic (TrueType)  Candarali.ttf
+Font copied and  registered: Candara Bold Italic (TrueType)  Candaraz.ttf
+Font copied and  registered: Comic Sans MS (TrueType)  comic.ttf
+Font copied and  registered: Comic Sans MS Bold (TrueType)  comicbd.ttf
+Font copied and  registered: Comic Sans MS Italic (TrueType)  comici.ttf
+Font copied and  registered: Comic Sans MS Bold Italic (TrueType)  comicz.ttf
+Font copied and  registered: Consolas (TrueType)  consola.ttf
+Font copied and  registered: Consolas Bold (TrueType)  consolab.ttf
+Font copied and  registered: Consolas Italic (TrueType)  consolai.ttf
+Font copied and  registered: Consolas Bold Italic (TrueType)  consolaz.ttf
+Font copied and  registered: Constantia (TrueType)  constan.ttf
+Font copied and  registered: Constantia Bold (TrueType)  constanb.ttf
+Font copied and  registered: Constantia Italic (TrueType)  constani.ttf
+Font copied and  registered: Constantia Bold Italic (TrueType)  constanz.ttf
+Font copied and  registered: Corbel (TrueType)  corbel.ttf
+Font copied and  registered: Corbel Bold (TrueType)  corbelb.ttf
+Font copied and  registered: Corbel Italic (TrueType)  corbeli.ttf
+Font copied and  registered: Corbel Light (TrueType)  corbell.ttf
+Font copied and  registered: Corbel Light Italic (TrueType)  corbelli.ttf
+Font copied and  registered: Corbel Bold Italic (TrueType)  corbelz.ttf
+Font copied and  registered: Courier New (TrueType)  cour.ttf
+Font copied and  registered: Courier New Bold (TrueType)  courbd.ttf
+Font copied and  registered: Courier New Bold Italic (TrueType)  courbi.ttf
+Font copied and  registered: Courier (TrueType)  coure.fon
+Font copied and  registered: Courier New Italic (TrueType)  couri.ttf
+Font copied and  registered: CourierStd-Bold (TrueType)  CourierStd-Bold.otf
+Font copied and  registered: CourierStd-BoldOblique (TrueType)  CourierStd-BoldOblique.otf
+Font copied and  registered: CourierStd-Oblique (TrueType)  CourierStd-Oblique.otf
+Font copied and  registered: CourierStd (TrueType)  CourierStd.otf
+Font copied and  registered: Ebrima (TrueType)  ebrima.ttf
+Font copied and  registered: Ebrima Bold (TrueType)  ebrimabd.ttf
+Font copied and  registered: Franklin Gothic Medium (TrueType)  framd.ttf
+Font copied and  registered: Franklin Gothic Medium Italic (TrueType)  framdit.ttf
+Font copied and  registered: Gabriola (TrueType)  Gabriola.ttf
+Font copied and  registered: Gadugi (TrueType)  gadugi.ttf
+Font copied and  registered: Gadugi Bold (TrueType)  gadugib.ttf
+Font copied and  registered: Georgia (TrueType)  georgia.ttf
+Font copied and  registered: Georgia Bold (TrueType)  georgiab.ttf
+Font copied and  registered: Georgia Italic (TrueType)  georgiai.ttf
+Font copied and  registered: Georgia Bold Italic (TrueType)  georgiaz.ttf
+Font copied and  registered: Gulim; GulimChe; Dotum; DotumChe (TrueType)  gulim.ttc
+Font copied and  registered: Microsoft Himalaya (TrueType)  himalaya.ttf
+Font copied and  registered: Impact (TrueType)  impact.ttf
+Font copied and  registered: Ink Free (TrueType)  Inkfree.ttf
+Font copied and  registered: Javanese Text (TrueType)  javatext.ttf
+Font copied and  registered: Kofax-Action-Icons (TrueType)  Kofax-Action-Icons.ttf
+Font copied and  registered: KozGoPr6N-Medium (TrueType)  KozGoPr6N-Medium.otf
+Font copied and  registered: KozMinPr6N-Regular (TrueType)  KozMinPr6N-Regular.otf
+Font copied and  registered: Leelawadee UI Bold (TrueType)  LeelaUIb.ttf
+Font copied and  registered: Leelawadee UI (TrueType)  LeelawUI.ttf
+Font copied and  registered: Leelawadee UI Semilight (TrueType)  LeelUIsl.ttf
+Copy-Item : Access to the path 'C:\windows\fonts\lucon.ttf' is denied.
+At C:\KTA\PowershellScripts\InstallFonts.ps1:15 char:3
++         Copy-Item $objFile.Path "c:\windows\fonts";
++         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : PermissionDenied: (C:\KTA\Fonts\lucon.ttf:FileIn
+   fo) [Copy-Item], UnauthorizedAccessException
+    + FullyQualifiedErrorId : CopyFileInfoItemUnauthorizedAccessError,Microsof 
+   t.PowerShell.Commands.CopyItemCommand
+
+Font copied and  registered: Lucida Console (TrueType)  lucon.ttf
+Font copied and  registered: Lucida Sans Unicode (TrueType)  l_10646.ttf
+Font copied and  registered: Malgun Gothic (TrueType)  malgun.ttf
+Font copied and  registered: Malgun Gothic Bold (TrueType)  malgunbd.ttf
+Font copied and  registered: Malgun Gothic Semilight (TrueType)  malgunsl.ttf
+Font copied and  registered: Meiryo; Meiryo Italic; Meiryo UI; Meiryo UI Italic (TrueType)  meiryo.ttc
+Font copied and  registered: Meiryo Bold; Meiryo Bold Italic; Meiryo UI Bold; Meiryo UI Bold Italic (TrueType)  meiryob.ttc
+Font copied and  registered: Microsoft Sans Serif (TrueType)  micross.ttf
+Font copied and  registered: MingLiU; PMingLiU; MingLiU_HKSCS (TrueType)  mingliu.ttc
+Font copied and  registered: MingLiU-ExtB; PMingLiU-ExtB; MingLiU_HKSCS-ExtB (TrueType)  mingliub.ttc
+Font copied and  registered: MinionPro-Regular (TrueType)  MinionPro-Regular.otf
+Font copied and  registered: Myanmar Text (TrueType)  mmrtext.ttf
+Font copied and  registered: Myanmar Text Bold (TrueType)  mmrtextb.ttf
+Font copied and  registered: Modern (TrueType)  modern.fon
+Font copied and  registered: Mongolian Baiti (TrueType)  monbaiti.ttf
+Font copied and  registered: MS Gothic; MS UI Gothic; MS PGothic (TrueType)  msgothic.ttc
+Font copied and  registered: Microsoft JhengHei; Microsoft JhengHei UI (TrueType)  msjh.ttc
+Font copied and  registered: Microsoft JhengHei Bold; Microsoft JhengHei UI Bold (TrueType)  msjhbd.ttc
+Font copied and  registered: Microsoft JhengHei Light; Microsoft JhengHei UI Light (TrueType)  msjhl.ttc
+Font copied and  registered: MS Mincho; MS PMincho (TrueType)  msmincho.ttc
+Font copied and  registered: Microsoft YaHei; Microsoft YaHei UI (TrueType)  msyh.ttc
+Font copied and  registered: Microsoft YaHei Bold; Microsoft YaHei UI Bold (TrueType)  msyhbd.ttc
+Font copied and  registered: Microsoft YaHei Light; Microsoft YaHei UI Light (TrueType)  msyhl.ttc
+Font copied and  registered: Microsoft Yi Baiti (TrueType)  msyi.ttf
+Font copied and  registered: MV Boli (TrueType)  mvboli.ttf
+Font copied and  registered: MyriadPro-Regular (TrueType)  MyriadPro-Regular.otf
+Font copied and  registered: Nirmala UI (TrueType)  Nirmala.ttf
+Font copied and  registered: Nirmala UI Bold (TrueType)  NirmalaB.ttf
+Font copied and  registered: Nirmala UI Semilight (TrueType)  NirmalaS.ttf
+Font copied and  registered: Microsoft New Tai Lue (TrueType)  ntailu.ttf
+Font copied and  registered: Microsoft New Tai Lue Bold (TrueType)  ntailub.ttf
+Font copied and  registered: Palatino Linotype (TrueType)  pala.ttf
+Font copied and  registered: Palatino Linotype Bold (TrueType)  palab.ttf
+Font copied and  registered: Palatino Linotype Bold Italic (TrueType)  palabi.ttf
+Font copied and  registered: Palatino Linotype Italic (TrueType)  palai.ttf
+Font copied and  registered: Microsoft PhagsPa (TrueType)  phagspa.ttf
+Font copied and  registered: Microsoft PhagsPa Bold (TrueType)  phagspab.ttf
+Font copied and  registered: Roman (TrueType)  roman.fon
+Font copied and  registered: Script (TrueType)  script.fon
+Font copied and  registered: Segoe MDL2 Assets (TrueType)  segmdl2.ttf
+Font copied and  registered: Segoe Print (TrueType)  segoepr.ttf
+Font copied and  registered: Segoe Print Bold (TrueType)  segoeprb.ttf
+Font copied and  registered: Segoe Script (TrueType)  segoesc.ttf
+Font copied and  registered: Segoe Script Bold (TrueType)  segoescb.ttf
+Font copied and  registered: Segoe UI (TrueType)  segoeui.ttf
+Font copied and  registered: Segoe UI Bold (TrueType)  segoeuib.ttf
+Font copied and  registered: Segoe UI Italic (TrueType)  segoeuii.ttf
+Font copied and  registered: Segoe UI Light (TrueType)  segoeuil.ttf
+Font copied and  registered: Segoe UI Semilight (TrueType)  segoeuisl.ttf
+Font copied and  registered: Segoe UI Bold Italic (TrueType)  segoeuiz.ttf
+Font copied and  registered: Segoe UI Black (TrueType)  seguibl.ttf
+Font copied and  registered: Segoe UI Black Italic (TrueType)  seguibli.ttf
+Font copied and  registered: Segoe UI Emoji (TrueType)  seguiemj.ttf
+Font copied and  registered: Segoe UI Historic (TrueType)  seguihis.ttf
+Font copied and  registered: Segoe UI Light Italic (TrueType)  seguili.ttf
+Font copied and  registered: Segoe UI Semibold (TrueType)  seguisb.ttf
+Font copied and  registered: Segoe UI Semibold Italic (TrueType)  seguisbi.ttf
+Font copied and  registered: Segoe UI Semilight Italic (TrueType)  seguisli.ttf
+Font copied and  registered: Segoe UI Symbol (TrueType)  seguisym.ttf
+Font copied and  registered: MS Serif (TrueType)  serife.fon
+Font copied and  registered: SimSun; NSimSun (TrueType)  simsun.ttc
+Font copied and  registered: SimSun-ExtB (TrueType)  simsunb.ttf
+Font copied and  registered: Sitka Small; Sitka Text; Sitka Subheading; Sitka Heading; Sitka Display; Sitka Banner (TrueType)  Sitka.ttc
+Font copied and  registered: Sitka Small Bold; Sitka Text Bold; Sitka Subheading Bold; Sitka Heading Bold; Sitka Display Bold; Sitka Banner Bold (TrueType)  SitkaB.ttc
+Font copied and  registered: Sitka Small Italic; Sitka Text Italic; Sitka Subheading Italic; Sitka Heading Italic; Sitka Display Italic; Sitka Banner Italic (TrueType)  SitkaI.ttc
+Font copied and  registered: Sitka Small Bold Italic; Sitka Text Bold Italic; Sitka Subheading Bold Italic; Sitka Heading Bold Italic; Sitka Display Bold Italic; Sitka Banner Bold Italic (TrueType)  SitkaZ.ttc
+Font copied and  registered: Small Fonts; MS Serif (TrueType)  smalle.fon
+Font copied and  registered: MS Sans Serif (TrueType)  sserife.fon
+Font copied and  registered: Sylfaen (TrueType)  sylfaen.ttf
+Font copied and  registered: Symbol (TrueType)  symbol.ttf
+Font copied and  registered: Tahoma (TrueType)  tahoma.ttf
+Font copied and  registered: Tahoma Bold (TrueType)  tahomabd.ttf
+Font copied and  registered: Microsoft Tai Le (TrueType)  taile.ttf
+Font copied and  registered: Microsoft Tai Le Bold (TrueType)  taileb.ttf
+Font copied and  registered: Times New Roman (TrueType)  times.ttf
+Font copied and  registered: Times New Roman Bold (TrueType)  timesbd.ttf
+Font copied and  registered: Times New Roman Bold Italic (TrueType)  timesbi.ttf
+Font copied and  registered: Times New Roman Italic (TrueType)  timesi.ttf
+Font copied and  registered: Trebuchet MS (TrueType)  trebuc.ttf
+Font copied and  registered: Trebuchet MS Bold (TrueType)  trebucbd.ttf
+Font copied and  registered: Trebuchet MS Bold Italic (TrueType)  trebucbi.ttf
+Font copied and  registered: Trebuchet MS Italic (TrueType)  trebucit.ttf
+Font copied and  registered: UD Digi Kyokasho N-B; UD Digi Kyokasho NP-B; UD Digi Kyokasho NK-B (TrueType)  UDDigiKyokashoN-B.ttc
+Font copied and  registered: UD Digi Kyokasho N-R; UD Digi Kyokasho NP-R; UD Digi Kyokasho NK-R (TrueType)  UDDigiKyokashoN-R.ttc
+Font copied and  registered: Verdana (TrueType)  verdana.ttf
+Font copied and  registered: Verdana Bold (TrueType)  verdanab.ttf
+Font copied and  registered: Verdana Italic (TrueType)  verdanai.ttf
+Font copied and  registered: Verdana Bold Italic (TrueType)  verdanaz.ttf
+Font copied and  registered: Terminal (TrueType)  vga850.fon
+Font copied and  registered: Fixedsys (TrueType)  vgafix.fon
+Font copied and  registered: System (TrueType)  vgasys.fon
+Font copied and  registered: Webdings (TrueType)  webdings.ttf
+Font copied and  registered: Wingdings (TrueType)  wingding.ttf
+Font copied and  registered: Yu Gothic Bold; Yu Gothic UI Bold; Yu Gothic UI Semibold (TrueType)  YuGothB.ttc
+Font copied and  registered: Yu Gothic Light; Yu Gothic UI Light (TrueType)  YuGothL.ttc
+Font copied and  registered: Yu Gothic Medium; Yu Gothic UI Regular (TrueType)  YuGothM.ttc
+Font copied and  registered: Yu Gothic Regular; Yu Gothic UI Semilight (TrueType)  YuGothR.ttc
+Font copied and  registered: Yu Mincho Regular (TrueType)  yumin.ttf
+Font copied and  registered: Yu Mincho Demibold (TrueType)  yumindb.ttf
+Font copied and  registered: Yu Mincho Light (TrueType)  yuminl.ttf
+9/15/2023 8:45:00 AM: Windows fonts copied successfully.
+
+Status      : Stopped
+Name        : KofaxTransformationServerService
+DisplayName : Kofax Transformation Server
+
+9/15/2023 8:45:04 AM: Start Fixpack Silent Install
+9/15/2023 8:51:46 AM: Fixpack Silent Install Finished.. sleep for 10 seconds
+Set-Service : Cannot stop service 'Kofax Transformation Server 
+(KofaxTransformationServerService)' because it is dependent on other services.
+At C:\KTA\PowershellScripts\ConfigureContainer.ps1:187 char:4
++             Set-Service -Name  $_.Name -StartupType Manual -Status "S ...
++             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (System.ServiceProcess.Service
+   Controller:ServiceController) [Set-Service], ServiceCommandException
+    + FullyQualifiedErrorId : ServiceIsDependentOnNoForce,Microsoft.PowerShell
+   .Commands.SetServiceCommand
+
+9/15/2023 8:51:56 AM: Completed FixPack silent Install
+9/15/2023 8:51:56 AM: Success: TS doc converter ini copied
+9/15/2023 8:51:56 AM: Success: TS doc converter default ini copied
+Install Logs
+KofaxTotalAgilitySilentHotFixLog.txt
+Silent HotFix Log
+Success: Loading config files into memory
+Success: Files copied successfully
+Success: Upgrade.exe config updated successfully
+Success: Transformation Server installed successfully
+Success: Product successfully registered
+KofaxTotalAgilitySilentInstallLog.txt
+Silent Install Log
+Success: Files copied successfully
+Success: Config files updated successfully
+Success: Transformation Server installed successfully
+Success: Product successfully registered
+9/15/2023 8:51:56 AM: Completed silent Install
+9/15/2023 8:51:56 AM: Delete Program Cache
+9/15/2023 8:51:57 AM: Program Cache deletion completed
+9/15/2023 8:51:57 AM: Delete installation media
+9/15/2023 8:53:39 AM: Installation media deletion completed
+
+
+Removing intermediate container 01f76b0f64f0
+ ---> 52e32c68fc4e
+Step 6/8 : EXPOSE 80
+ ---> Running in 6f5826454bbf
+Removing intermediate container 6f5826454bbf
+ ---> 8433d251314a
+Step 7/8 : EXPOSE 443
+ ---> Running in af54c881cc6f
+Removing intermediate container af54c881cc6f
+ ---> 1eb519261a3b
+Step 8/8 : ENTRYPOINT powershell "C:\\KTA\\PowershellScripts\\Startup.ps1"
+ ---> Running in 45119cc97a48
+Removing intermediate container 45119cc97a48
+ ---> a58e1b5d053d
+Successfully built a58e1b5d053d
+Successfully tagged ktatransformation:v7.11.0.5-SEP2023v3
+ *  Terminal will be reused by tasks, press any key to close it. 

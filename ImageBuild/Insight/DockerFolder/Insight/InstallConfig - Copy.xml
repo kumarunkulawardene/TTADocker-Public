@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<InstallSettings>
+	<InstallDirectory>C:\Program Files\Kofax\Insight 6.4.0</InstallDirectory>
+	<WebDirContext CreateAppPool="False" CreateWebSite="False" Port="80" UseSSL="False">
+		<ApplicationPoolName>DefaultAppPool</ApplicationPoolName>
+		<WebSiteName>Default Web Site</WebSiteName>
+	</WebDirContext>
+	<Projects UpdateAll="False">
+	</Projects>
+	<MultiTenant>False</MultiTenant>
+</InstallSettings>

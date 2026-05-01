@@ -1,0 +1,3 @@
+basicConstraints=CA:TRUE
+subjectAltName=DNS:intermediate.kofax.com.au
+extendedKeyUsage=serverAuth

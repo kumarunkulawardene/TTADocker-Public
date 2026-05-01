@@ -1,0 +1,49 @@
+version: "3.7"
+services:
+  insight-web:
+    image: insightwebssl:v6.4
+    build:
+      context: .
+      dockerfile: InsightWeb.Dockerfile
+    ports:
+      - "8080:80"
+      - "8081:443"
+    volumes:
+      - insight-data-volume:C:\Temp\InsightData
+    environment:
+      - DataService_IsDocker=true
+
+      #single mode
+      - "DataService_Insight.Admin.MasterDBConnectionString=Data Source=<DB_SERVER>; Initial Catalog=InsightAdmin2; Password=<REDACTED_PASSWORD>; User Id=<DB_USER>;"
+                                                            
+      #multi tenant mode
+      - "DataService_Insight.TenantAdmin.MasterDBConnectionString= "
+
+      - "DataService_Insight.Password=<REDACTED_PASSWORD>"
+      - "DataService_Insight.Admin.MasterDBName=MS SQL Server"
+      - "DataService_Insight.Admin.MasterDBProviderName=sql"
+      - Insight_DataServiceUrl=https://insight-web/WcfDataService/DataService.svc
+      - Insight_HtmlServiceUrl=https://insight-web/WcfDataService/HtmlDataService.svc
+      - Insight_ViewerUrl=https://insight-web/View/Default.aspx
+
+      - ChartSnapshot_Insight.Pdf.AdditionalArguments=--no-sandbox
+
+  insight-scheduler:
+    image: insightschedulerssl:v6.4
+    build:
+      context: .
+      dockerfile: Scheduler.Dockerfile
+    volumes:
+      - insight-data-volume:C:\Temp\InsightData
+    environment:
+      - Scheduler_Login=<INSIGHT_SCHEDULER_USER>
+      - Scheduler_Password=<REDACTED_PASSWORD>
+      - Scheduler_DataServiceUrl=https://insight-web/WcfDataService/DataService.svc
+      - DashboardServer_DataServiceUrl=https://insight-web/WcfDataService/DataService.svc
+      - DashboardServer_BridgeServiceURI=tcp://insight-scheduler:15870/IBridgeService.rem
+volumes:
+  insight-data-volume:
+networks:
+  default:
+    external:
+      name: nat

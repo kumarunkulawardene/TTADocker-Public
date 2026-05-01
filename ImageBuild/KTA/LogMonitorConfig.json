@@ -1,0 +1,39 @@
+{
+  "LogConfig": {
+    "sources": [
+      {
+        "type": "EventLog",
+        "startAtOldestRecord": true,
+        "eventFormatMultiLine": true,
+        "channels": [
+          {
+            "name": "application",
+            "level": "Warning"
+          },
+          {
+            "name": "application",
+            "level": "Error"
+          }
+        ]
+      },
+      {
+        "type": "File",
+        "directory": "c:\\inetpub\\logs",
+        "filter": "*.log",
+        "includeSubdirectories": true
+      },
+      {
+        "type": "File",
+        "directory": "C:\\ProgramData\\Kofax\\KIC-ED\\MC\\Log",
+        "filter": "*.log",
+        "includeSubdirectories": true
+      },        
+      {
+        "type": "File",
+        "directory": "C:\\Program Files\\Kofax\\TotalAgility\\Transformation Server",
+        "filter": "KofaxCPUServerLog.log",
+        "includeSubdirectories": true
+      }
+    ]
+  }
+}

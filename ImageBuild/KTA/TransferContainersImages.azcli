@@ -1,0 +1,79 @@
+###############################################################################
+# KTA Cloud Training Series - Supporting scripts
+# Transfer image from one registry to another
+# 
+# This script includes commands that can be used transfer image from one registry 
+# to another
+#
+# Author: Kofax Professional Services Centre of Excellence (COE) 
+##############################################################################
+
+# Option 1:
+# 	1. docker pull source-registry:tag
+# 	2. docker tag source-registry:tag target-registry:tag
+# 	3. docker push target-registry:tag
+
+# Login to Azure (will launch browser to authenticate)
+# To complete the authentication flow, the Docker CLI and Docker daemon must be installed and running in your environment
+az Login
+
+# Pull the image from the source repository to local repository
+# Note the pull access should be granted to the user. If anonypous access is granted any one can pull the image. 
+docker pull coekofax.azurecr.io/ktawebappnolicense:v7.9
+docker pull coekofax.azurecr.io/ktalicense:v7.9
+
+# Tag the image with new repository/ACR name
+docker tag ktawebapp:v7.11.0.12-FEB2024 <CONTAINER_REGISTRY>/ktawebapp:v7.11.0.12-FEB2024
+docker tag ktamessageconnector:v7.11.0.12-FEB2024 <CONTAINER_REGISTRY>/ktamessageconnector:v7.11.0.12-FEB2024
+docker tag ktalicense:v7.11.0.12-FEB2024 <CONTAINER_REGISTRY>/ktalicense:v7.11.0.12-FEB2024
+docker tag ktareporting:v7.11.0.5-AUG2023 <CONTAINER_REGISTRY>/ktareporting:v7.11.0.5-AUG2023
+docker tag ktatransformation:v7.11.0.5-SEP2023v3 <CONTAINER_REGISTRY>/ktatransformation:v7.11.0.5-SEP2023v3
+
+docker tag ktais:v7.11.0.0R3-SEP2023v2 <CONTAINER_REGISTRY>/ktais:v7.11.0.0R3-SEP2023v2
+docker tag ktawebapp:v7.11.0.12-APR2024logmon <CONTAINER_REGISTRY>/ktawebapp:v7.11.0.12-APR2024logmon
+
+
+#Tag updated insight images
+docker tag insightscheduler:v6.4-OCT2023 <CONTAINER_REGISTRY>/insightschedulerssl:v6.4-OCT2023v2
+docker tag insightwebssl:v6.4-OCT2023v2 <CONTAINER_REGISTRY>/insightwebssl:v6.4-OCT2023v2
+
+# Connect to ACR
+az acr login --name <CONTAINER_REGISTRY>
+
+
+# Push the image v7.11.0.5-AUG2023
+docker push <CONTAINER_REGISTRY>/ktawebapp:v7.11.0.12-FEB2024v2
+docker push <CONTAINER_REGISTRY>/ktalicense:v7.11.0.12-FEB2024v2
+docker push <CONTAINER_REGISTRY>/ktamessageconnector:v7.11.0.12-FEB2024v2
+docker push <CONTAINER_REGISTRY>/ktareporting:v7.11.0.12-FEB2024v2
+docker push <CONTAINER_REGISTRY>/ktatransformation:v7.11.0.12-FEB2024v2
+docker push <CONTAINER_REGISTRY>/insightwebssl:v6.4-OCT2023v2
+docker push <CONTAINER_REGISTRY>/insightschedulerssl:v6.4-OCT2023v2
+
+docker push <CONTAINER_REGISTRY>/ktawebapp:v7.11.0.12-APR2024LMv3
+docker push <CONTAINER_REGISTRY>/ktatransformation:v7.11.0.12-APR2024LM
+docker push <CONTAINER_REGISTRY>/insightwebssl:v6.5.0.5-MAY2024LM
+docker push <CONTAINER_REGISTRY>/insightschedulerssl:v6.5.0.5-MAY2024LM
+
+docker push <CONTAINER_REGISTRY>/ktais:v7.11.0.0R3-SEP2023v2
+
+
+# Option 2:
+#   az acr import \
+#       --name <destinationRegistry> \
+#       --source <sourceRegistry>.azurecr.io/<Image:Tag> \
+#       --username <SourceRegistryUsername> \
+#       --password <SourceRegistryPassword>
+
+# Login to Azure (will launch browser to authenticate)
+az Login
+
+# Connect to ACR
+az acr login --name <CONTAINER_REGISTRY>
+
+# Pull KTA webapp from coekofax.azurecr.io
+### This did not work as I think the coekofax ACR did not have the correct permissions... 
+az acr import --name <CONTAINER_REGISTRY> --source coekofax.azurecr.io/ktalicense:v7.11.0.5-AUG2023 -t ktalicense2:v7.11.0.5-AUG2023
+
+### This worked after adding the admin user key as the password
+az acr import --name <CONTAINER_REGISTRY> --source coekofax.azurecr.io/ktawebappssltal:v7.11.0.5-AUG2023 -t ktawebappssltal:v7.11.0.5-AUG2023 --username coekofax --password Q3J8cJMcoiEk8u=+HcdLZ3yoWBNCjoK7

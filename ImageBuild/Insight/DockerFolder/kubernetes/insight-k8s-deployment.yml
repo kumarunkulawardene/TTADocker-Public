@@ -1,0 +1,142 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: insight-web
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: insight-web
+  template:
+    metadata:
+      labels:
+        app: insight-web
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": windows
+      containers:
+        - name: insight-web
+          image: <INSIGHT WEB IMAGE URL>
+          env:
+            - name: DataService_IsDocker
+              value: "true"
+            - name: DataService_Insight.LicenseFolder
+              value: "C:/Temp/InsightData"
+            - name: DataService_UseHighAvailability
+              value: "true"
+            - name: DataService_Insight.UseIpAddressInsteadOfHost
+              value: "true"
+            - name: DataService_Insight.Admin.MasterDBConnectionString
+              value: " "
+            - name: DataService_Insight.TenantAdmin.MasterDBConnectionString
+              value: " "
+            - name: DataService_Insight.Password
+              value: "<REDACTED_PASSWORD>"
+            - name: DataService_Insight.Admin.MasterDBName
+              value: "MS SQL Server"
+            - name: Insight_DataServiceUrl
+              value: "http://insight-web/WcfDataService/DataService.svc"
+            - name: DataService_Insight.Admin.MasterDBProviderName
+              value: "sql"
+            - name: Insight_HtmlServiceUrl
+              value: "http://insight-web/WcfDataService/HtmlDataService.svc"
+            - name: Insight_ViewerUrl
+              value: "http://insight-web/View/Default.aspx"
+            - name: ChartSnapshot_Insight.Pdf.AdditionalArguments
+              value: "--no-sandbox"
+            - name: Insight_MachineDecryptionKey
+              value: "<REDACTED_MACHINE_KEY>"
+            - name: Insight_MachineValidationKey
+              value: "<REDACTED_MACHINE_KEY>"
+
+          resources:
+            requests:
+              cpu: 0.5
+              memory: 1024M
+            limits:
+              cpu: 1
+              memory: 2048M
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - mountPath: "C:/Temp/InsightData"
+              name: insight-data-azurefile
+      imagePullSecrets:
+        - name: regcred
+      volumes:
+        - name: insight-data-azurefile
+          persistentVolumeClaim:
+            claimName: insight-data-azurefile
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: insight-web
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+  selector:
+    app: insight-web
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: insight-scheduler
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: insight-scheduler
+  template:
+    metadata:
+      labels:
+        app: insight-scheduler
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": windows
+      containers:
+        - name: insight-scheduler
+          image: <SCHEDULER IMAGE URL>
+          resources:
+            requests:
+              cpu: 0.2
+              memory: 1024M
+            limits:
+              cpu: 0.6
+              memory: 2048M
+          ports:
+            - containerPort: 13640
+              name: scheduler
+          env:
+            - name: Scheduler_Login
+              value: "<INSIGHT_SCHEDULER_USER>"
+            - name: Scheduler_Password
+              value: "<REDACTED_PASSWORD>"
+            - name: Scheduler_DataServiceUrl
+              value: "http://insight-web/WcfDataService/DataService.svc"
+            - name: "DashboardServer_DataServiceUrl"
+              value: "http://insight-web/WcfDataService/DataService.svc"
+            - name: DashboardServer_BridgeServiceURI
+              value: "tcp://insight-scheduler:15870/IBridgeService.rem"
+            - name: Scheduler_UseIpAddressInsteadOfHost
+              value: "true"
+          volumeMounts:
+            - mountPath: "C:/Temp/InsightData"
+              name: insight-data-azurefile
+      imagePullSecrets:
+        - name: regcred
+      volumes:
+        - name: insight-data-azurefile
+          persistentVolumeClaim:
+            claimName: insight-data-azurefile
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: insight-scheduler
+spec:
+  selector:
+    app: insight-scheduler
+  ports:
+    - port: 13640

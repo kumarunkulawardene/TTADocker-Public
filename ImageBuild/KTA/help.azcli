@@ -1,0 +1,46 @@
+docker run -d --hostname "ktamwebapp" --name "ktamwebapp" -p 5000:80 ktawebapp:v7.11.0.12-FEB2024
+docker run -d --hostname "ktamwebapp" --name "ktamwebapp" -p 5000:80 <CONTAINER_REGISTRY>/ktawebapp:v7.11.0.12-APR2024LMv3
+
+docker exec -it ktawebapp  powershell
+
+docker run -d --hostname "ktalicense" --name "ktalicense" --env-file "C:\KTA\DockerSettings_OnPremise_FullInstall_COE.Env" -p 5000:80 ktalicense:v7.11.0.5-JUL2023
+docker run -d --hostname "ktawebapp" --name "ktawebapp" --env-file "C:\KTA\DockerSettings_OnPremise_FullInstall_COE.Env" -p 5000:80 ktawebapp:v7.11.0.12-FEB2024
+docker run -d --hostname "ktamc" --name "ktamc" --env-file "C:\KTA\DockerSettings_OnPremise_FullInstall_COE.Env" -p 25086:25086 ktamc:v7.11.0.5-AUG2023
+docker run -d --hostname "ktareporting" --name "ktareporting" --env-file "C:\KTA\DockerSettings_OnPremise_FullInstall_COE.Env" -p 5000:80 ktareporting:v7.11.0.5-JUL2023
+docker run -d --hostname "ktats" --name "ktats" --env-file "C:\KTA\DockerSettings_OnPremise_FullInstall_COE.Env" -p 5000:80 ktatransformation:v7.11.0.5-AUG2023v4
+docker run -d --hostname "insightscheduler" --name "insightscheduler"  -p 5000:80 insightscheduler:v6.4-OCT2023
+docker run -d --hostname "insightweb" --name "insightweb"  -p 5000:80 insightwebssl:v6.4-OCT2023v2
+docker run -d --hostname "ktais" --name "ktais" --env-file "C:\KTA\DockerSettings_OnPremise_IS.Env"  -p 5000:80 -p 25086:25086 ktais:v7.11.0.0R3-SEP2023v2
+docker run -d --hostname "ktais2" --name "ktais2" --env-file "C:\KTA\DockerSettings_OnPremise_IS.Env" -p 5010:80 -p 25096:25086 ktais:v7.11.0.0R3-SEP2023v2
+docker run -d --hostname "windowsmoniortest" --name "windowsmoniortest" -p 5010:80 windowsmoniortest:latest
+
+
+docker run -it ktalicense:v7.11.0.3-APR2023
+
+get-eventlog -Logname Application -newest 20 | format-table -auto -wrap
+
+Get-Service| ForEach-Object {	    if ($_.DisplayName.StartsWith("Kofax")) {        Set-Service -Name  $_.Name -StartupType Manual -Status "Stopped" -PassThru;        	}
+
+Get-Service KSALicenseService | Select-Object -Property Name, StartType, Status
+Get-Service| ForEach-Object {	    if ($_.DisplayName.StartsWith("Kofax")) {        Start-Service -Name  $_.Name -PassThru;        	}}
+
+
+Get-Service | Select-Object -Property Name, StartType, Status, displayname
+Get-Service "TotalAgility Core Worker" | Select-Object -Property Name, StartType, Status, displayname
+
+
+$result = Stop-Service -Name  "TotalAgility Core Worker" -Force -PassThru -ErrorAction Stop;
+
+$result = Stop-Service -Name  "KIC-ED-MC" -Force -PassThru -ErrorAction Stop;
+
+
+Start-Process "c:\windows\system32\sc.exe" stop "TotalAgility Core Worker"  -NoNewWindow -Wait
+while ((Get-Service -ComputerName $computer -Name "TotalAgility Core Worker"  | 
+Select -ExpandProperty Status) -ne 'Stopped') {
+    Write-Host "Waiting for service to stop..."
+    Start-Sleep -Seconds 10
+}
+
+
+# Check if adalsql is installed 
+Get-WmiObject -Class Win32_Product | Where-Object Name -Match SQL | Format-Table

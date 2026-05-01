@@ -1,0 +1,27 @@
+{
+  "LogConfig": {
+    "sources": [
+      {
+        "type": "EventLog",
+        "startAtOldestRecord": true,
+        "eventFormatMultiLine": true,
+        "channels": [
+          {
+            "name": "application",
+            "level": "Warning"
+          },
+          {
+            "name": "application",
+            "level": "Error"
+          }
+        ]
+      },
+      {
+        "type": "File",
+        "directory": "C:\\Temp",
+        "filter": "*.log",
+        "includeSubdirectories": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<InstallSettings>
+	<InstallDirectory>C:\Program Files\Kofax\Insight 6.5.0</InstallDirectory>
+	<WebDirContext CreateAppPool="False" CreateWebSite="False" Port="443" UseSSL="True">
+		<ApplicationPoolName>DefaultAppPool</ApplicationPoolName>
+		<WebSiteName>Default Web Site</WebSiteName>
+		<!-- <Certificate Thumbprint="20f2a686d8a07274bd3d24f8eb9646f500e6d08c" Name=""/>  -->
+	</WebDirContext>
+	<Projects UpdateAll="False">
+	</Projects>
+	<MultiTenant>False</MultiTenant>
+</InstallSettings>

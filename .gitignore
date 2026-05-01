@@ -1,0 +1,10 @@
+*.msi
+*.exe
+*.dll
+*.msp
+*.pfx
+*.key
+*.pem
+*.zip
+*.log
+*.env.local

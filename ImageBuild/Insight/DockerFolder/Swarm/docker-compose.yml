@@ -1,0 +1,58 @@
+version: "3.7"
+services:
+  insight-web:
+    image: <INSIGHT IMAGE URL>
+    ports:
+      - "8080:80"
+    networks:
+      - core-infra
+    volumes:
+      - type: bind
+        source: G:\
+        target: C:\Temp\InsightData
+    deploy:
+      replicas: 2
+    environment:
+      - DataService_IsDocker=true
+      - DataService_UseHighAvailability=true
+      - DataService_Insight.UseIpAddressInsteadOfHost=true
+      #single mode
+      - "DataService_Insight.Admin.MasterDBConnectionString= "
+      #multi tenant mode
+      - "DataService_Insight.TenantAdmin.MasterDBConnectionString= "
+
+      - "DataService_Insight.Password=<REDACTED_PASSWORD>"
+      - "DataService_Insight.Admin.MasterDBName=MS SQL Server"
+      - "DataService_Insight.Admin.MasterDBProviderName=sql"
+      - "DataService_Insight.LicenseFolder=C:/Temp/InsightData"
+      - Insight_DataServiceUrl=http://insight-web/WcfDataService/DataService.svc
+      - Insight_HtmlServiceUrl=http://insight-web/WcfDataService/HtmlDataService.svc
+      - Insight_ViewerUrl=http://insight-web/View/Default.aspx
+      #customize your machine key parameters
+      #you can also specify validation algorithm via Insight_MachineValidation (default value SHA1)
+      - Insight_MachineDecryptionKey=<REDACTED_MACHINE_KEY>
+      - Insight_MachineValidationKey=<REDACTED_MACHINE_KEY>
+      - ChartSnapshot_Insight.Pdf.AdditionalArguments=--no-sandbox
+
+  insight-scheduler:
+    image: <SCHEDULER IMAGE URL>
+    networks:
+      - core-infra
+    volumes:
+      - type: bind
+        source: G:\
+        target: C:\Temp\InsightData
+    deploy:
+      replicas: 2
+    environment:
+      - Scheduler_Login=<INSIGHT_SCHEDULER_USER>
+      - Scheduler_Password=<REDACTED_PASSWORD>
+      - Scheduler_UseIpAddressInsteadOfHost=true
+      - Scheduler_DataServiceUrl=http://insight-web/WcfDataService/DataService.svc
+      - DashboardServer_DataServiceUrl=http://insight-web/WcfDataService/DataService.svc
+      - DashboardServer_BridgeServiceURI=tcp://insight-scheduler:15870/IBridgeService.rem
+volumes:
+  insight-data-volume:
+networks:
+  core-infra:
+    external: true

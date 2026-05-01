@@ -1,0 +1,60 @@
+PS C:\Users\<WINDOWS_USER>\Documents\GitHub\docker\ImageBuild\Insight\DockerFolder> docker build -f .\Scheduler.Dockerfile -t insightschedulerssl:v6.5.0.5-MAY2024LM --memory=16g .
+Sending build context to Docker daemon  624.9MB
+Step 1/18 : FROM mcr.microsoft.com/dotnet/framework/aspnet:4.8.1-windowsservercore-ltsc2022
+ ---> 75edccfb8ec1
+Step 2/18 : RUN NET USER Insight_Admin /add
+ ---> Using cache
+ ---> 0be71ba23c85
+Step 3/18 : RUN NET LOCALGROUP Administrators /add Insight_Admin
+ ---> Using cache
+ ---> c7d14a307d3f
+Step 4/18 : RUN NET ACCOUNTS /maxpwage:unlimited
+ ---> Using cache
+ ---> d66a215daa83
+Step 5/18 : SHELL ["powershell", "-Command"]
+ ---> Using cache
+ ---> b2b88baa2372
+Step 6/18 : COPY Insight c:\\Insight
+ ---> Using cache
+ ---> 40a72322b0c5
+Step 7/18 : RUN Write-Host 'Downloading Microsoft Redistributive Packages' ; $RedistFile = 'C:\Insight\Tools\vc_redist.x64.exe' ; Write-Host 'Installing Microsoft Redistributive Packages' ; Start-Process $RedistFile -ArgumentList '/quiet', '/norestart' -NoNewWindow -Wait
+ ---> Using cache
+ ---> 290b6e29420a
+Step 8/18 : RUN Write-Host 'Microsoft Access Database Engine 2016 Redistributable' ; $MdacFile = 'C:\Insight\Tools\accessdatabaseengine_X64.exe' ; Write-Host 'Microsoft Access Database Engine 2016 Redistributable' ; Start-Process $MdacFile -ArgumentList '/quiet', '/norestart' -NoNewWindow -Wait
+ ---> Using cache
+ ---> 51d284fa0d13
+Step 9/18 : RUN Start-Process msiexec.exe -ArgumentList '/i', 'C:\Insight\adalsql.msi','/quiet' -NoNewWindow -Wait
+ ---> Using cache
+ ---> c4d1700c9a60
+Step 10/18 : USER Insight_Admin
+ ---> Using cache
+ ---> cafcc4a65e56
+Step 11/18 : RUN c:\\Insight\\configurecontainer.ps1
+ ---> Using cache
+ ---> 902500691981
+Step 12/18 : RUN Start-Process msiexec.exe -ArgumentList '/i', 'C:\Insight\KofaxInsightSetup_6.5.0.0.0.820_x64.msi', '/qn', 'INSTALLATION_TYPE=CUSTOM', 'INSTALLATION_TYPE_W=0', 'INSTALLATION_TYPE_I=0', 'INSTALLATION_TYPE_S=1' -NoNewWindow -Wait
+ ---> Using cache
+ ---> 2ceb12073a61
+Step 13/18 : RUN Start-Process msiexec.exe -ArgumentList '/update', 'C:\Insight\KofaxInsight_6.5.0.5.0.877_x64.msp', '/norestart', '/qn' -NoNewWindow -Wait
+ ---> Running in c14b6081e83b
+Removing intermediate container c14b6081e83b
+ ---> 3cf8558953cd
+Step 14/18 : EXPOSE 13501
+ ---> Running in 13f927efdfb3
+Removing intermediate container 13f927efdfb3
+ ---> 4c885a7962f2
+Step 15/18 : COPY start_sheduler.ps1 c:\\start_sheduler.ps1
+ ---> f8b8a9b70ec8
+Step 16/18 : COPY LogMonitor c:\\LogMonitor
+ ---> b72144d48cf8
+Step 17/18 : SHELL ["C:\\LogMonitor\\LogMonitor.exe", "powershell.exe"]
+ ---> Running in fc86037e394b
+Removing intermediate container fc86037e394b
+ ---> 096fff9d6e98
+Step 18/18 : ENTRYPOINT "C:\\start_sheduler.ps1"
+ ---> Running in 1e4417e86acb
+Removing intermediate container 1e4417e86acb
+ ---> 63c06ab48983
+Successfully built 63c06ab48983
+Successfully tagged insightschedulerssl:v6.5.0.5-MAY2024LM
+PS C:\Users\<WINDOWS_USER>\Documents\GitHub\docker\ImageBuild\Insight\DockerFolder> 

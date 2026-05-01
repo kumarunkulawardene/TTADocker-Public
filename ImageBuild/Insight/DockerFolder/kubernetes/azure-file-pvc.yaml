@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: insight-data-azurefile
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: insight-data-azurefile
+  resources:
+    requests:
+      storage: 1Gi

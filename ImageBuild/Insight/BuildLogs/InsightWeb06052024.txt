@@ -1,0 +1,245 @@
+ending build context to Docker daemon  624.9MB
+Step 1/24 : FROM mcr.microsoft.com/dotnet/framework/aspnet:4.8.1-windowsservercore-ltsc2022
+4.8.1-windowsservercore-ltsc2022: Pulling from dotnet/framework/aspnet
+Digest: sha256:5421160be4acbc8b5c386e4b281402b40822642654ccfe9220e8aa7aaf10be8a
+Status: Image is up to date for mcr.microsoft.com/dotnet/framework/aspnet:4.8.1-windowsservercore-ltsc2022
+ ---> 75edccfb8ec1
+Step 2/24 : RUN powershell -NoProfile -Command     Dism /online /enable-feature /featurename:WCF-HTTP-Activation45 /all;
+ ---> Running in 92d656dafc46
+
+Deployment Image Servicing and Management tool
+Version: 10.0.20348.681
+
+Image Version: 10.0.20348.2402
+
+Enabling feature(s)
+[                           0.1%                           ] 
+[                           1.1%                           ] 
+[=                          2.1%                           ] 
+[=                          3.1%                           ] 
+[==                         4.1%                           ] 
+[==                         5.1%                           ] 
+[===                        6.1%                           ] 
+[====                       7.1%                           ] 
+[====                       8.1%                           ] 
+[=====                      9.1%                           ] 
+[=====                      10.0%                          ] 
+[=====                      10.0%                          ] 
+[======                     11.0%                          ] 
+[======                     12.0%                          ] 
+[=======                    13.0%                          ] 
+[========                   14.0%                          ] 
+[========                   15.0%                          ] 
+[=========                  16.0%                          ]
+[=========                  17.0%                          ]
+[==========                 18.0%                          ]
+[===========                19.0%                          ]
+[===========                20.0%                          ]
+[============               21.0%                          ]
+[============               22.0%                          ]
+[=============              23.0%                          ]
+[=============              24.0%                          ]
+[==============             25.0%                          ] 
+[===============            26.0%                          ]
+[===============            27.0%                          ]
+[================           28.0%                          ]
+[================           29.0%                          ] 
+[=================          30.0%                          ] 
+[=================          31.0%                          ] 
+[==================         32.0%                          ] 
+[===================        33.0%                          ] 
+[====================       34.5%                          ] 
+[====================       35.7%                          ] 
+[=====================      36.9%                          ] 
+[======================     38.0%                          ] 
+[======================     39.2%                          ] 
+[=======================    40.4%                          ] 
+[========================   41.5%                          ] 
+[========================   42.7%                          ]
+[=========================  43.8%                          ] 
+[========================== 45.0%                          ]
+[========================== 46.2%                          ]
+[===========================47.3%                          ] 
+[===========================48.5%                          ]
+[===========================49.7%                          ]
+[===========================50.8%                          ] 
+[===========================52.0%                          ]
+[===========================53.1%                          ] 
+[===========================54.3%                          ] 
+[===========================55.5%                          ] 
+[===========================56.3%                          ] 
+[===========================56.9%=                         ] 
+[===========================57.1%=                         ] 
+[===========================57.6%=                         ] 
+[===========================58.0%=                         ] 
+[===========================58.3%=                         ] 
+[===========================58.6%=                         ] 
+[===========================59.2%==                        ] 
+[===========================59.4%==                        ] 
+[===========================59.8%==                        ] 
+[===========================60.1%==                        ] 
+[===========================60.3%==                        ] 
+[===========================60.7%===                       ] 
+[===========================61.0%===                       ] 
+[===========================61.5%===                       ] 
+[===========================61.9%===                       ] 
+[===========================62.2%====                      ] 
+[===========================62.5%====                      ] 
+[===========================62.8%====                      ] 
+[===========================63.2%====                      ] 
+[===========================63.6%====                      ] 
+[===========================63.8%=====                     ] 
+[===========================64.2%=====                     ] 
+[===========================64.6%=====                     ] 
+[===========================65.1%=====                     ] 
+[===========================65.4%=====                     ] 
+[===========================65.9%======                    ] 
+[===========================66.2%======                    ] 
+[===========================66.6%======                    ] 
+[===========================66.9%======                    ] 
+[===========================67.4%=======                   ] 
+[===========================68.0%=======                   ] 
+[===========================68.5%=======                   ] 
+[===========================69.1%========                  ] 
+[===========================69.4%========                  ] 
+[===========================69.9%========                  ] 
+[===========================70.1%========                  ] 
+[===========================70.5%========                  ] 
+[===========================71.0%=========                 ] 
+[===========================71.7%=========                 ] 
+[===========================72.0%=========                 ] 
+[===========================72.2%=========                 ] 
+[===========================72.5%==========                ] 
+[===========================72.8%==========                ] 
+[===========================73.4%==========                ] 
+[===========================73.9%==========                ] 
+[===========================74.5%===========               ] 
+[===========================81.7%===============           ] 
+[===========================82.7%===============           ] 
+[===========================83.8%================          ] 
+[===========================84.8%=================         ] 
+[===========================86.0%=================         ]
+[===========================87.2%==================        ] 
+[===========================88.4%===================       ]
+[===========================89.6%===================       ] 
+[===========================90.6%====================      ]
+[===========================91.6%=====================     ]
+[===========================92.7%=====================     ] 
+[===========================96.2%=======================   ] 
+[===========================99.0%========================= ] 
+[===========================99.0%========================= ] 
+[==========================100.0%==========================] 
+The operation completed successfully.
+Removing intermediate container 92d656dafc46
+ ---> bec5ddee7eda
+Step 3/24 : RUN NET USER Insight_Admin /add
+ ---> Running in f65dd82a99b5
+The command completed successfully.
+
+Removing intermediate container f65dd82a99b5
+ ---> 3e42bccc0f90
+Step 4/24 : RUN NET LOCALGROUP Administrators /add Insight_Admin
+ ---> Running in d52fa680d265
+The command completed successfully.
+
+Removing intermediate container d52fa680d265
+ ---> ae04e1f3b8b6
+Step 5/24 : RUN NET ACCOUNTS /maxpwage:unlimited
+ ---> Running in 86bea93900ae
+The command completed successfully.
+
+Removing intermediate container 86bea93900ae
+ ---> 1d18246043d3
+Step 6/24 : SHELL ["powershell", "-Command"]
+ ---> Running in 72287dffd430
+Removing intermediate container 72287dffd430
+ ---> f8b8921e1987
+Step 7/24 : COPY Insight c:\\Insight
+ ---> ce0ebbc3922d
+Step 8/24 : RUN Write-Host 'Downloading Microsoft Redistributive Packages' ; $RedistFile = 'C:\Insight\Tools\vc_redist.x64.exe' ; Write-Host 'Installing Microsoft Redistributive Packages' ; Start-Process $RedistFile -ArgumentList '/quiet', '/norestart' -NoNewWindow -Wait
+ ---> Running in abd9d697756e
+Downloading Microsoft Redistributive Packages
+Installing Microsoft Redistributive Packages
+Removing intermediate container abd9d697756e
+ ---> 6ca13740d916
+Step 9/24 : RUN Write-Host 'Microsoft Access Database Engine 2016 Redistributable' ; $MdacFile = 'C:\Insight\Tools\accessdatabaseengine_X64.exe' ; Write-Host 'Microsoft Access Database Engine 2016 Redistributable' ; Start-Process $MdacFile -ArgumentList '/quiet', '/norestart' -NoNewWindow -Wait
+ ---> Running in a2f736197def
+Microsoft Access Database Engine 2016 Redistributable
+Microsoft Access Database Engine 2016 Redistributable
+Removing intermediate container a2f736197def
+ ---> 696f8e32cf8f
+Step 10/24 : RUN c:\\Insight\\install_fonts.ps1
+ ---> Running in 4d9e6d2a939c
+Removing intermediate container 4d9e6d2a939c
+ ---> b51804c4febb
+Step 11/24 : RUN Start-Process msiexec.exe -ArgumentList '/i', 'C:\Insight\adalsql.msi','/quiet' -NoNewWindow -Wait
+ ---> Running in ab99afefa0e0
+Removing intermediate container ab99afefa0e0
+ ---> f158e2cf5bf9
+Step 12/24 : RUN c:\\Insight\\ConfigureContainer.ps1
+ ---> Running in d41fd2f27d0a
+5/6/2024 6:56:31 AM: Install Self signed cert
+
+IP Address          Port   Host Name        Store            Sites
+----------          ----   ---------        -----            -----
+<IP_ADDRESS>             443                     My
+
+Attempting stop...
+Internet services successfully stopped
+Attempting start...
+Internet services successfully restarted
+5/6/2024 6:57:02 AM: Updating Registry to restrict null session and anonymous access
+
+
+Removing intermediate container d41fd2f27d0a
+ ---> 09e0b6b4e5af
+Step 13/24 : USER Insight_Admin
+ ---> Running in 59418309e8ab
+Removing intermediate container 59418309e8ab
+ ---> c212dc330239
+Step 14/24 : RUN Start-Process msiexec.exe -ArgumentList '/i', 'C:\Insight\KofaxInsightSetup_6.5.0.0.0.820_x64.msi', '/qn', 'INSTALLATION_TYPE=CUSTOM', 'INSTALLATION_TYPE_W=1', 'INSTALLATION_TYPE_I=1', 'INSTALLATION_TYPE_S=0' -NoNewWindow -Wait
+ ---> Running in 468e38aff8c1
+Removing intermediate container 468e38aff8c1
+ ---> 083e25933d8c
+Step 15/24 : RUN Start-Process msiexec.exe -ArgumentList '/update', 'C:\Insight\KofaxInsight_6.5.0.5.0.877_x64.msp', '/qn' -NoNewWindow -Wait
+ ---> Running in 458be2449286
+Removing intermediate container 458be2449286
+ ---> 2970156c805c
+Step 16/24 : RUN Start-Process -FilePath 'C:\Program Files\Kofax\Insight 6.5.0\InstallManager\Altosoft.Insight.InstallManager.exe' -ArgumentList '/i', '/a', '/f', 'c:\Insight\InstallConfig.xml' -Wait
+ ---> Running in 40464b15bdeb
+Removing intermediate container 40464b15bdeb
+ ---> 2ae40ef0e574
+Step 17/24 : RUN Import-Module WebAdministration;     Set-ItemProperty 'IIS:\AppPools\DefaultAppPool' -Name 'processModel.loadUserProfile' -Value 'True';     Set-ItemProperty 'IIS:\AppPools\DefaultAppPool' -Name 'processModel.setProfileEnvironment' -Value 'True';    Set-ItemProperty 'IIS:\AppPools\DefaultAppPool' -Name 'processModel' -Value @{ userName='Insight_Admin'; identitytype=3 }  
+ ---> Running in 101994240c6f
+Removing intermediate container 101994240c6f
+ ---> 259befa6afdf
+Step 18/24 : RUN & c:\windows\system32\inetsrv\appcmd.exe       unlock config       /section:system.webServer/handlers
+ ---> Running in 749b4f3f018e
+Unlocked section "system.webServer/handlers" at configuration path "MACHINE/WEBROOT/APPHOST".
+Removing intermediate container 749b4f3f018e
+ ---> 13c0340bbc05
+Step 19/24 : RUN [System.Environment]::SetEnvironmentVariable('ChartSnapshot_Insight.Pdf.AdditionalArguments', '--no-sandbox', 'machine')
+ ---> Running in 1263d7de16a7
+Removing intermediate container 1263d7de16a7
+ ---> 95ea9010049a
+Step 20/24 : EXPOSE 80
+ ---> Running in 289dc80f2839
+Removing intermediate container 289dc80f2839
+ ---> d0af5932ee2f
+Step 21/24 : EXPOSE 443
+ ---> Running in fcce3f58cbd7
+Removing intermediate container fcce3f58cbd7
+ ---> 4a45dfa0a786
+Step 22/24 : COPY LogMonitor c:\\LogMonitor
+ ---> 6420a9d971b1
+Step 23/24 : SHELL ["C:\\LogMonitor\\LogMonitor.exe", "powershell.exe"]
+ ---> Running in a1af282785ee
+Removing intermediate container a1af282785ee
+ ---> 875ddd3cd970
+Step 24/24 : ENTRYPOINT "C:\\Insight\\Startup.ps1"
+ ---> Running in b8b9012870a3
+Removing intermediate container b8b9012870a3
+ ---> f21bcb554183
+Successfully built f21bcb554183
+Successfully tagged <CONTAINER_REGISTRY>/insightwebssl:v6.5.0.5-MAY2024LM
+ *  Terminal will be reused by tasks, press any key to close it. 
